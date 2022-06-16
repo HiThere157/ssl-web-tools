@@ -4,21 +4,24 @@
   <Checkbox label="OS Detection" v-model="OSDetection" />
   <Select label="Timing" v-model="timing" :options="timingOptions" />
 
-  <Checkbox label="Scan TCP Ports" v-model="scanTCP" />
-  <Text
-    label="TCP Ports"
-    v-if="scanTCP"
-    v-model="TCPPorts"
-    placeholder="Comma separated list of ports..."
-  />
+  <Select label="Select Ports" v-model="portOption" :options="portOptions" />
+  <template v-if="portOption === 'custom'">
+    <Checkbox label="Scan TCP Ports" v-model="scanTCP" />
+    <Text
+      label="TCP Ports"
+      v-if="scanTCP"
+      v-model="TCPPorts"
+      placeholder="Comma separated list of ports..."
+    />
 
-  <Checkbox label="Scan UDP Ports" v-model="scanUDP" />
-  <Text
-    label="UDP Ports"
-    v-if="scanUDP"
-    v-model="UDPPorts"
-    placeholder="Comma separated list of ports..."
-  />
+    <Checkbox label="Scan UDP Ports" v-model="scanUDP" />
+    <Text
+      label="UDP Ports"
+      v-if="scanUDP"
+      v-model="UDPPorts"
+      placeholder="Comma separated list of ports..."
+    />
+  </template>
 
   <hr />
   <div class="justify-right">
@@ -38,6 +41,8 @@ export default {
       serviceDetection: true,
       OSDetection: true,
       timing: "T3",
+      portOption: "T1000",
+
       scanTCP: true,
       scanUDP: false,
       TCPPorts: "",
@@ -45,6 +50,13 @@ export default {
     };
   },
   computed: {
+    portOptions() {
+      return {
+        T1000: "Top 1000 Ports",
+        T100: "Top 100 Ports",
+        custom: "Custom",
+      };
+    },
     timingOptions() {
       return {
         T4: "Aggressive",
