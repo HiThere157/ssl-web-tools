@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header-title">
-      <h1>SSL Tools Web</h1>
+      <h1>SSL Web Tools</h1>
     </div>
   </div>
 </template>

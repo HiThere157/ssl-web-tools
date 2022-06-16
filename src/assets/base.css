@@ -36,8 +36,6 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
   --color-text-inverse: var(--vt-c-text-dark-2);
-
-  --section-gap: 160px;
 }
 
 @media (prefers-color-scheme: dark) {

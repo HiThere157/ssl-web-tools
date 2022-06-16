@@ -1,6 +1,6 @@
 <template>
   <Text label="Target" v-model="target" placeholder="Hostname..." />
-  <Text label="Max Hops" onlyNumbers="true" v-model="maxHops" />
+  <Text label="Max Hops" :onlyNumbers="true" v-model="maxHops" />
 
   <hr />
   <div class="justify-right">

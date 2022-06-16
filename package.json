@@ -1,5 +1,5 @@
 {
-  "name": "ssl-tools-web",
+  "name": "ssl-web-tools",
   "version": "0.0.0",
   "scripts": {
     "dev.vue": "vite",

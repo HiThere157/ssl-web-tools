@@ -1,6 +1,6 @@
 <template>
   <Text label="Target" v-model="target" placeholder="Hostname..." />
-  <Text label="Count" onlyNumbers="true" v-model="count" />
+  <Text label="Count" :onlyNumbers="true" v-model="count" />
 
   <hr />
   <div class="justify-right">
