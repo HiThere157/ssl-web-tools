@@ -51,7 +51,7 @@ export default {
   right: 0;
   bottom: 0;
   height: 2.5rem;
-  border-radius: 2rem;
+  border-radius: 1.25rem;
   border: 0.2rem solid var(--color-border);
   background-color: var(--color-background);
   cursor: pointer;

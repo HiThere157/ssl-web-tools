@@ -31,7 +31,7 @@
           class="green-pill"
           @click="$emit('update:modelValue', Number(modelValue) + 1)"
         >
-          <ChevronIcon :rotateUp="true"/>
+          <ChevronIcon :rotateUp="true" />
         </button>
 
         <button
@@ -90,7 +90,7 @@ export default {
   padding: 0.5rem;
   padding-left: 1rem;
   border: 0.2rem solid var(--color-border);
-  border-radius: 2rem;
+  border-radius: 1.25rem;
   background-color: var(--color-background);
   color: var(--color-text);
 }

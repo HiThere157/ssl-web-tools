@@ -5,10 +5,7 @@
       <div class="selected" @click="isOpen = !isOpen">
         {{ options[modelValue] }}
       </div>
-      <div
-        class="input-items"
-        :class="{ 'input-hidden': !isOpen }"
-      >
+      <div class="input-items" :class="{ 'input-hidden': !isOpen }">
         <div
           v-for="(option, i) in Object.keys(options)"
           :key="i"
@@ -20,10 +17,7 @@
           {{ options[option] }}
         </div>
       </div>
-      <button
-        class="green-pill"
-        @click="isOpen = !isOpen"
-      >
+      <button class="green-pill" @click="isOpen = !isOpen">
         <ChevronIcon :rotateUp="isOpen" />
       </button>
     </div>
@@ -83,7 +77,7 @@ export default {
   padding: 0.5rem;
   padding-left: 1rem;
   border: 0.2rem solid var(--color-border);
-  border-radius: 2rem;
+  border-radius: 1.25rem;
   background-color: var(--color-background);
   cursor: pointer;
 }
@@ -99,7 +93,7 @@ export default {
   left: 0;
   right: 0;
   border: 0.2rem solid var(--color-border);
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   background-color: var(--color-background);
   overflow: hidden;
   z-index: 1;

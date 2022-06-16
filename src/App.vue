@@ -24,7 +24,7 @@ import TestResult from "./components/TestResult.vue";
 .content {
   display: flex;
   flex-grow: 1;
-  min-height: 30rem;
+  min-height: fit-content;
 }
 
 .container {

@@ -22,12 +22,11 @@ export default {
   display: block;
   padding: 0.5rem 1rem;
   text-decoration: none;
-  border-radius: 2rem;
+  border-radius: 1.25rem;
   color: var(--color-text);
 }
 
 .tab:focus {
-  outline: .2rem solid var(--color-border);
-
+  outline: 0.2rem solid var(--color-border);
 }
 </style>
