@@ -18,6 +18,7 @@ export default {
   mounted() {
     this.$socket.on("newResultData", (result) => {
       const { timestamp, title, data } = result;
+      
       if (!this.results[timestamp]) {
         this.results[timestamp] = {
           timestamp,

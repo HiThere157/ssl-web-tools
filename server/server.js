@@ -31,7 +31,11 @@ io.on("connection", (socket) => {
     });
 
     ls.on("error", (error) => {
-      callback({ status: 500, message: error.message });
+      callback({ status: 500, error: error.message });
+    });
+
+    ls.on("close", (code) => {
+      callback({ status: 200, code: code });
     });
   });
 });
