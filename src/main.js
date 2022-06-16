@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
+import { io } from "socket.io-client";
 import App from "./App.vue";
 
 import Ping from "./components/Tests/Ping.vue";
@@ -24,5 +25,6 @@ const router = createRouter({
 });
 
 const app = createApp(App);
+app.config.globalProperties.$socket = io();
 app.use(router);
 app.mount("#app");

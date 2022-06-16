@@ -43,5 +43,6 @@ export default {
 .result-body {
   padding: 0.5rem;
   background-color: var(--color-background);
+  white-space: pre-wrap;
 }
 </style>

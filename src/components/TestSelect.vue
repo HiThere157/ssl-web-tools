@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="container-title">Run Test</h1>
+    <h1 class="container-title">Run Tests</h1>
 
     <div class="tab-container">
       <Tab title="SSL" route="/" />

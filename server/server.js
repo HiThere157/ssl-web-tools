@@ -4,6 +4,7 @@ const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const { spawn } = require("child_process");
 
 const port = 9000;
 const path = __dirname + "/../dist/";
@@ -15,7 +16,24 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  socket.on("runTracert", (data, callback) => {
+    const { target, maxHops } = data;
+
+    const timestamp = new Date().getTime();
+
+    const ls = spawn("ping", ["www.google.de"]);
+    ls.stdout.on("data", (data) => {
+      socket.emit("newResultData", {
+        timestamp,
+        title: "Tracert",
+        data: data.toString(),
+      });
+    });
+
+    ls.on("error", (error) => {
+      callback({ status: 500, message: error.message });
+    });
+  });
 });
 
 server.listen(port, () => {

@@ -4,7 +4,7 @@
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="">Run Test</button>
+    <button class="green-pill fs-1 fw-bold" @click="runTest()">Run Test</button>
   </div>
 </template>
 
@@ -17,6 +17,20 @@ export default {
       target: "www.google.de",
       maxHops: 30,
     };
+  },
+  methods: {
+    runTest() {
+      this.$socket.emit(
+        "runTracert",
+        {
+          target: this.target,
+          maxHops: this.maxHops,
+        },
+        (result) => {
+          console.log(result);
+        }
+      );
+    },
   },
   components: {
     Text,
