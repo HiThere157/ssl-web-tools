@@ -3,6 +3,7 @@ function sendResponse(socket, timestamp, title, cmd) {
     socket.emit("newResultData", {
       timestamp,
       title,
+      command: cmd.spawnargs.join(" "),
       data: data.toString(),
     });
   };

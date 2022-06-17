@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --update nodejs npm bind-tools nmap
+RUN apk add --update nodejs npm bind-tools
 
 COPY ./dist /app/dist
 COPY ./server /app/server

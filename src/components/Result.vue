@@ -10,20 +10,25 @@
     >
       <span class="fw-bold">{{ title }} - {{ status }}</span>
 
-      <button
-        class="transparent-pill"
-        @click="$emit('removeResult')"
-      >
-        <CloseIcon />
-      </button>
+      <div class="result-action">
+        <button class="transparent-pill" @click="$emit('removeResult')">
+          <CloseIcon />
+        </button>
+        <button class="transparent-pill" @click="toggleExpanded()">
+          <ChevronIcon :rotateUp="isExpanded" />
+        </button>
+      </div>
     </div>
 
-    <div class="result-body">{{ body }}</div>
+    <div class="result-body" :class="{ 'result-expanded': isExpanded }">
+      {{ body }}
+    </div>
   </div>
 </template>
 
 <script>
 import CloseIcon from "./Icons/Close.vue";
+import ChevronIcon from "./Icons/Chevron.vue";
 
 export default {
   props: {
@@ -40,9 +45,20 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isExpanded: false,
+    };
+  },
+  methods: {
+    toggleExpanded() {
+      this.isExpanded = !this.isExpanded;
+    },
+  },
   emit: ["removeResult"],
   components: {
     CloseIcon,
+    ChevronIcon,
   },
 };
 </script>
@@ -75,6 +91,11 @@ export default {
   color: var(--vt-c-text-light-1);
 }
 
+.result-action {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
 .result-header button {
   height: 2rem;
   aspect-ratio: 1;
@@ -82,8 +103,14 @@ export default {
 }
 
 .result-body {
+  max-height: 20rem;
+  overflow-y: auto;
   padding: 0.5rem;
   background-color: var(--color-background);
   white-space: pre-wrap;
+}
+
+.result-expanded {
+  max-height: 40rem;
 }
 </style>

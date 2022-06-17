@@ -2,7 +2,8 @@ const {
   validateHostname,
   validateIp,
   validateInt,
-  validateBool,
+  validateSelection,
+  validatePortRange,
 } = require("../utils/validateInput");
 
 test("validate Hostname Input", () => {
@@ -13,9 +14,7 @@ test("validate Hostname Input", () => {
   expect(validateHostname("google.com")).toBe(true);
   expect(validateHostname("www.google.com")).toBe(true);
 
-  expect(validateHostname("&& google.com")).toBe(false);
   expect(validateHostname("www.google.com &&")).toBe(false);
-  expect(validateHostname("www.google.com //")).toBe(false);
 });
 
 test("validate IP Input", () => {
@@ -40,26 +39,43 @@ test("validate IP Input", () => {
 
   expect(validateIp("www.google.com")).toBe(false);
   expect(validateIp("192.168.178.157 &&")).toBe(false);
-  expect(validateIp("192.168.178.157 //")).toBe(false);
 });
 
 test("validate Int Input", () => {
   expect(validateInt("", 0, 1)).toBe(false);
+  expect(validateInt(1, 0, 1)).toBe(true);
   expect(validateInt("0", 0, 1)).toBe(true);
   expect(validateInt("1", 0, 1)).toBe(true);
 
+  expect(validateInt(123, 0, 1)).toBe(false);
   expect(validateInt("2", 0, 1)).toBe(false);
   expect(validateInt("-1", 0, 1)).toBe(false);
 
   expect(validateInt("abc", 0, 1)).toBe(false);
 });
 
-test("validate Bool Input", () => {
-  expect(validateBool("")).toBe(false);
+test("validate Selection Input", () => {
+  expect(validateSelection("", ["a", "b", "c"])).toBe(false);
+  expect(validateSelection("a", ["a", "b", "c"])).toBe(true);
 
-  expect(validateBool(true)).toBe(true);
-  expect(validateBool(false)).toBe(true);
+  expect(validateSelection(1, ["a", "b", "c"])).toBe(false);
+  expect(validateSelection("d", ["a", "b", "c"])).toBe(false);
+});
 
-  expect(validateBool("1")).toBe(false);
-  expect(validateBool("true")).toBe(false);
+test("validate Port Range Input", () => {
+  expect(validatePortRange("")).toBe(false);
+  expect(validatePortRange("", true)).toBe(true);
+
+  expect(validatePortRange("100")).toBe(true);
+  expect(validatePortRange("65535")).toBe(true);
+  expect(validatePortRange("65536")).toBe(false);
+
+  expect(validatePortRange("1-100")).toBe(true);
+  expect(validatePortRange("1-65535")).toBe(true);
+
+  expect(validatePortRange("-1")).toBe(false);
+  expect(validatePortRange("abc")).toBe(false);
+
+  expect(validatePortRange("1-75535")).toBe(false);
+  expect(validatePortRange("1-100-200")).toBe(false);
 });

@@ -32,8 +32,19 @@ function validateInt(target, min, max) {
   return !(isNaN(targetInt) || targetInt < min || targetInt > max);
 }
 
-function validateBool(target) {
-  return typeof target === "boolean";
+function validateSelection(target, options) {
+  return options.includes(target);
+}
+
+function validatePortRange(target, optional = false) {
+  if (optional && target === "") {
+    return true;
+  }
+
+  const portRange_Regex =
+    /^(6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[0-9]{1,4})$|^(6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[0-9]{1,4})-(6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[0-9]{1,4})$/;
+
+  return portRange_Regex.test(target);
 }
 
 module.exports = {
@@ -41,5 +52,6 @@ module.exports = {
   validateIp,
   validateHost,
   validateInt,
-  validateBool,
+  validateSelection,
+  validatePortRange,
 };

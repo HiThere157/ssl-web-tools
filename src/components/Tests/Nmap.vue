@@ -5,27 +5,18 @@
   <Select label="Timing" v-model="timing" :options="timingOptions" />
 
   <Select label="Select Ports" v-model="portOption" :options="portOptions" />
-  <template v-if="portOption === 'custom'">
-    <Checkbox label="Scan TCP Ports" v-model="scanTCP" />
-    <Text
-      label="TCP Ports"
-      v-if="scanTCP"
-      v-model="TCPPorts"
-      placeholder="Comma separated list of ports..."
-    />
+  <Text
+    v-if="portOption === 'custom'"
+    label="TCP Ports"
+    v-model="TCPPorts"
+    placeholder="Comma separated list of ports..."
+  />
 
-    <Checkbox label="Scan UDP Ports" v-model="scanUDP" />
-    <Text
-      label="UDP Ports"
-      v-if="scanUDP"
-      v-model="UDPPorts"
-      placeholder="Comma separated list of ports..."
-    />
-  </template>
+  <Checkbox label="Verbose" v-model="verbose" />
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="">Run Test</button>
+    <button class="green-pill fs-1 fw-bold" @click="runTest">Run Test</button>
   </div>
 </template>
 
@@ -41,12 +32,11 @@ export default {
       serviceDetection: true,
       OSDetection: true,
       timing: "T3",
-      portOption: "T1000",
 
-      scanTCP: true,
-      scanUDP: false,
+      portOption: "T1000",
       TCPPorts: "",
-      UDPPorts: "",
+
+      verbose: false,
     };
   },
   computed: {
@@ -63,6 +53,21 @@ export default {
         T3: "Normal",
         T2: "Polite",
       };
+    },
+  },
+  methods: {
+    runTest() {
+      this.$socket.emit("runNmap", {
+        target: this.target,
+        serviceDetection: this.serviceDetection,
+        OSDetection: this.OSDetection,
+        timing: this.timing,
+
+        portOption: this.portOption,
+        TCPPorts: this.TCPPorts,
+
+        verbose: this.verbose,
+      });
     },
   },
   components: {

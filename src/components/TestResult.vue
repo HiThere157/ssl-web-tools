@@ -26,13 +26,8 @@ export default {
     this.$socket.on("newResultData", (result) => {
       const { timestamp, data } = result;
 
-      if (this.removedResults.includes(timestamp)) {
-        return;
-      }
-
-      if (!this.results[timestamp]) {
-        this.addResult(result);
-      }
+      if (this.removedResults.includes(timestamp)) return;
+      if (!this.results[timestamp]) this.addResult(result);
 
       this.results[timestamp].data += data;
     });
@@ -40,16 +35,10 @@ export default {
     this.$socket.on("newResultStatus", (result) => {
       const { timestamp, status, data } = result;
 
-      if (this.removedResults.includes(timestamp)) {
-        return;
-      }
-
-      if (!this.results[timestamp]) {
-        this.addResult(result);
-      }
+      if (this.removedResults.includes(timestamp)) return;
+      if (!this.results[timestamp]) this.addResult(result);
 
       this.results[timestamp].status = status;
-
       if (status === "error") {
         this.results[timestamp].data += data;
       }
@@ -61,13 +50,13 @@ export default {
   },
   methods: {
     addResult(result) {
-      const { timestamp, title, data } = result;
+      const { timestamp, title, command } = result;
 
       this.results[timestamp] = {
         timestamp,
         title,
         status: "pending",
-        data: "",
+        data: command ? "> " + command + "\n\n" : "",
       };
     },
     removeResult(timestamp) {
