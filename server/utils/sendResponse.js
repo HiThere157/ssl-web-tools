@@ -1,11 +1,14 @@
 function sendResponse(socket, timestamp, title, cmd) {
-  cmd.stdout.on("data", (data) => {
+  const sendData = (data) => {
     socket.emit("newResultData", {
       timestamp,
       title,
       data: data.toString(),
     });
-  });
+  };
+
+  cmd.stdout.on("data", sendData);
+  cmd.stderr.on("data", sendData);
 
   cmd.on("error", (error) => {
     sendStatusUpdate(socket, timestamp, title, "error", error.message);

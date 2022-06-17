@@ -1,11 +1,11 @@
 <template>
   <Text label="Target" v-model="target" placeholder="Hostname..." />
-  <Text label="DNS" v-model="dns" placeholder="DNS IP..." />
+  <Text label="DNS" v-model="dns" placeholder="DNS Server..." />
   <Checkbox label="Reverse" v-model="reverse" />
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="">Run Test</button>
+    <button class="green-pill fs-1 fw-bold" @click="runTest">Run Test</button>
   </div>
 </template>
 
@@ -17,9 +17,18 @@ export default {
   data() {
     return {
       target: "www.google.de",
-      dns: "8.8.8.8",
+      dns: "",
       reverse: false,
     };
+  },
+  methods: {
+    runTest() {
+      this.$socket.emit("runDig", {
+        target: this.target,
+        dns: this.dns,
+        reverse: this.reverse,
+      });
+    },
   },
   components: {
     Text,

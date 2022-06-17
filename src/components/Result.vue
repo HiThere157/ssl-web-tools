@@ -11,7 +11,6 @@
       <span class="fw-bold">{{ title }} - {{ status }}</span>
 
       <button
-        :disabled="status === 'pending'"
         class="transparent-pill"
         @click="$emit('removeResult')"
       >

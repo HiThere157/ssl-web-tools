@@ -6,7 +6,7 @@
       v-for="result in results"
       :title="result.title"
       :status="result.status"
-      :body="result.data"
+      :body="result.data.trim()"
       @removeResult="removeResult(result.timestamp)"
     ></Result>
   </div>
@@ -19,11 +19,16 @@ export default {
   data() {
     return {
       results: {},
+      removedResults: [],
     };
   },
   mounted() {
     this.$socket.on("newResultData", (result) => {
       const { timestamp, data } = result;
+
+      if (this.removedResults.includes(timestamp)) {
+        return;
+      }
 
       if (!this.results[timestamp]) {
         this.addResult(result);
@@ -34,6 +39,10 @@ export default {
 
     this.$socket.on("newResultStatus", (result) => {
       const { timestamp, status, data } = result;
+
+      if (this.removedResults.includes(timestamp)) {
+        return;
+      }
 
       if (!this.results[timestamp]) {
         this.addResult(result);
@@ -63,6 +72,7 @@ export default {
     },
     removeResult(timestamp) {
       delete this.results[timestamp];
+      this.removedResults.push(timestamp);
     },
   },
   components: {
