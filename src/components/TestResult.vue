@@ -1,8 +1,14 @@
 <template>
-  <div class="container" style="margin-left: 0;">
+  <div class="container" style="margin-left: 0">
     <h1 class="container-title">Run Test</h1>
 
-    <Result v-for="result in results" :title="result.title" :body="result.data"></Result>
+    <Result
+      v-for="result in results"
+      :title="result.title"
+      :status="result.status"
+      :body="result.data"
+      @removeResult="removeResult(result.timestamp)"
+    ></Result>
   </div>
 </template>
 
@@ -17,21 +23,47 @@ export default {
   },
   mounted() {
     this.$socket.on("newResultData", (result) => {
-      const { timestamp, title, data } = result;
-      
+      const { timestamp, data } = result;
+
       if (!this.results[timestamp]) {
-        this.results[timestamp] = {
-          timestamp,
-          title,
-          data: "",
-        };
+        this.addResult(result);
       }
 
       this.results[timestamp].data += data;
     });
+
+    this.$socket.on("newResultStatus", (result) => {
+      const { timestamp, status, data } = result;
+
+      if (!this.results[timestamp]) {
+        this.addResult(result);
+      }
+
+      this.results[timestamp].status = status;
+
+      if (status === "error") {
+        this.results[timestamp].data += data;
+      }
+    });
   },
   destroyed() {
     this.$socket.off("newResultData");
+    this.$socket.off("newResultStatus");
+  },
+  methods: {
+    addResult(result) {
+      const { timestamp, title, data } = result;
+
+      this.results[timestamp] = {
+        timestamp,
+        title,
+        status: "pending",
+        data: "",
+      };
+    },
+    removeResult(timestamp) {
+      delete this.results[timestamp];
+    },
   },
   components: {
     Result,

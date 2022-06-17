@@ -7,7 +7,7 @@
       <Tab title="Ping" route="/ping" />
       <Tab title="Dig" route="/dig" />
       <Tab title="Nmap" route="/nmap" />
-      <Tab title="Tracert" route="/tracert" />
+      <Tab title="Traceroute" route="/traceroute" />
     </div>
 
     <router-view></router-view>

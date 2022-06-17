@@ -13,6 +13,9 @@
   --custom-green-soft: #00b894;
   --custom-green-mute: #00a087;
 
+  --custom-orange: #ff9f43;
+  --custom-red: #e53e3e;
+
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
   --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
@@ -67,8 +70,9 @@ body {
   color: var(--color-text);
   background: var(--color-background);
   line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -99,7 +103,28 @@ hr {
 }
 
 .green-pill:focus {
-  outline: .2rem solid var(--color-border);
+  outline: 0.2rem solid var(--color-border);
+}
+
+.transparent-pill {
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--vt-c-text-light-1);
+  border-radius: 1.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.transparent-pill:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.transparent-pill:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.transparent-pill:focus {
+  outline: 0.2rem solid var(--color-border);
 }
 
 .fs-0 {

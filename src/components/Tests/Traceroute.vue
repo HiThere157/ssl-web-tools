@@ -20,16 +20,10 @@ export default {
   },
   methods: {
     runTest() {
-      this.$socket.emit(
-        "runTracert",
-        {
-          target: this.target,
-          maxHops: this.maxHops,
-        },
-        (result) => {
-          console.log(result);
-        }
-      );
+      this.$socket.emit("runTraceroute", {
+        target: this.target,
+        maxHops: this.maxHops,
+      });
     },
   },
   components: {
