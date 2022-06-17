@@ -3,7 +3,7 @@
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="">Run Test</button>
+    <button class="green-pill fs-1 fw-bold" @click="runTest">Run Test</button>
   </div>
 </template>
 
@@ -15,6 +15,13 @@ export default {
     return {
       target: "www.google.de",
     };
+  },
+  methods: {
+    runTest() {
+      this.$socket.emit("runSSL", {
+        target: this.target,
+      });
+    },
   },
   components: {
     Text,

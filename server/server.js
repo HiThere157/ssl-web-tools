@@ -27,6 +27,28 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  socket.on("runSSL", (data, callback) => {
+    const { target } = data;
+    const timestamp = new Date().getTime();
+    const title = "SSL Test of '" + target + "'";
+
+    if (!validateHost(target)) {
+      return sendStatusUpdate(
+        socket,
+        timestamp,
+        title,
+        "error",
+        "Invalid Input",
+      );
+    }
+
+    const args = [];
+    args.push(target);
+
+    const cmd = spawn("testssl.sh", args);
+    sendResponse(socket, timestamp, title, cmd);
+  });
+
   socket.on("runPing", (data, callback) => {
     const { target, count } = data;
     const timestamp = new Date().getTime();

@@ -11,11 +11,11 @@
       <span class="fw-bold">{{ title }} - {{ status }}</span>
 
       <div class="result-action">
-        <button class="transparent-pill" @click="$emit('removeResult')">
-          <CloseIcon />
-        </button>
         <button class="transparent-pill" @click="toggleExpanded()">
           <ChevronIcon :rotateUp="isExpanded" />
+        </button>
+        <button class="transparent-pill" @click="$emit('removeResult')">
+          <CloseIcon />
         </button>
       </div>
     </div>
@@ -56,9 +56,10 @@ export default {
     },
   },
   updated() {
-    this.$emit("updateResult");
+    const bodyElement = this.$el.querySelector(".result-body");
+    bodyElement.scrollTop = bodyElement.scrollHeight;
   },
-  emit: ["removeResult", "updateResult"],
+  emit: ["removeResult"],
   components: {
     CloseIcon,
     ChevronIcon,
@@ -111,6 +112,7 @@ export default {
   padding: 0.5rem;
   background-color: var(--color-background);
   white-space: pre-wrap;
+  font-family: Consolas, monaco, monospace;
 }
 
 .result-expanded {

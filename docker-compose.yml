@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  web:
+    image: ssl-web-tools:1.0
+    ports:
+      - "9500:9000"
