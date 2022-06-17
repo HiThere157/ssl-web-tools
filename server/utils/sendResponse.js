@@ -1,10 +1,13 @@
+const Convert = require("ansi-to-html");
+const convert = new Convert();
+
 function sendResponse(socket, timestamp, title, cmd) {
   const sendData = (data) => {
     socket.emit("newResultData", {
       timestamp,
       title,
       command: cmd.spawnargs.join(" "),
-      data: data.toString(),
+      data: convert.toHtml(data.toString()),
     });
   };
 

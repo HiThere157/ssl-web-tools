@@ -20,9 +20,7 @@
       </div>
     </div>
 
-    <div class="result-body" :class="{ 'result-expanded': isExpanded }">
-      {{ body }}
-    </div>
+    <div v-html="$sanitize(body)" class="result-body" :class="{ 'result-expanded': isExpanded }"></div>
   </div>
 </template>
 

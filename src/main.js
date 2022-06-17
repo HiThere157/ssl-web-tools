@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { io } from "socket.io-client";
+import Vue3Sanitize from "vue-3-sanitize";
 import App from "./App.vue";
 
 import Ping from "./components/Tests/Ping.vue";
@@ -24,7 +25,15 @@ const router = createRouter({
   routes,
 });
 
+const overridenOptions = {
+  allowedTags: ["span", "b", "u"],
+  allowedAttributes: {
+    span: ["style"],
+  },
+};
+
 const app = createApp(App);
 app.config.globalProperties.$socket = io();
 app.use(router);
+app.use(Vue3Sanitize, overridenOptions);
 app.mount("#app");
