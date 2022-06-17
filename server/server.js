@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
         timestamp,
         title,
         "error",
-        "Invalid Input"
+        "Invalid Input",
       );
     }
 
@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
         timestamp,
         title,
         "error",
-        "Invalid Input"
+        "Invalid Input",
       );
     }
 
@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
         timestamp,
         title,
         "error",
-        "Invalid Input"
+        "Invalid Input",
       );
     }
 
