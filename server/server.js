@@ -8,7 +8,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const { spawn } = require("child_process");
 
-const { sendResponse } = require("./sendResponse");
+const { sendResponse, sendStatusUpdate } = require("./sendResponse");
 const {
   validateHostname,
   validateIp,
@@ -29,29 +29,20 @@ io.on("connection", (socket) => {
   socket.on("runTraceroute", (data, callback) => {
     const { target, maxHops } = data;
     const timestamp = new Date().getTime();
+    const title = "Traceroute to '" + target + "'";
 
     if (!(validateHostname(target) || validateIp(target))) {
-      socket.emit("newResultStatus", {
-        timestamp,
-        title: "Traceroute",
-        status: "error",
-        data: "Invalid target",
-      });
+      sendStatusUpdate(socket, timestamp, title, "error", "Invalid target");
       return;
     }
 
     if (!validateInt(maxHops, 1, 30)) {
-      socket.emit("newResultStatus", {
-        timestamp,
-        title: "Traceroute",
-        status: "error",
-        data: "Invalid maxHops",
-      });
+      sendStatusUpdate(socket, timestamp, title, "error", "Invalid maxHops");
       return;
     }
 
-    const cmd = spawn("tracert", [target]);
-    sendResponse(socket, timestamp, "Traceroute", cmd);
+    const cmd = spawn("tracert", ["-h", maxHops, target]);
+    sendResponse(socket, timestamp, title, cmd);
   });
 });
 

@@ -1,4 +1,4 @@
-function sendResponse(socket, timestamp, title, cmd, callback) {
+function sendResponse(socket, timestamp, title, cmd) {
   cmd.stdout.on("data", (data) => {
     socket.emit("newResultData", {
       timestamp,
@@ -8,22 +8,21 @@ function sendResponse(socket, timestamp, title, cmd, callback) {
   });
 
   cmd.on("error", (error) => {
-    socket.emit("newResultStatus", {
-      timestamp,
-      title: "Traceroute",
-      status: "error",
-      data: error.message,
-    });
+    sendStatusUpdate(socket, timestamp, title, "error", error.message);
   });
 
   cmd.on("close", (code) => {
-    socket.emit("newResultStatus", {
-      timestamp,
-      title: "Traceroute",
-      status: "complete",
-      data: code,
-    });
+    sendStatusUpdate(socket, timestamp, title, "complete", code);
   });
 }
 
-module.exports = { sendResponse };
+function sendStatusUpdate(socket, timestamp, title, status, data) {
+  socket.emit("newResultStatus", {
+    timestamp,
+    title,
+    status,
+    data,
+  });
+}
+
+module.exports = { sendResponse, sendStatusUpdate };
