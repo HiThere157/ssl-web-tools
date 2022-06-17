@@ -7,7 +7,9 @@
       :title="result.title"
       :status="result.status"
       :body="result.data.trim()"
+      :data-timestamp="result.timestamp"
       @removeResult="removeResult(result.timestamp)"
+      @update="updateResult(result.timestamp)"
     ></Result>
   </div>
 </template>
@@ -62,6 +64,12 @@ export default {
     removeResult(timestamp) {
       delete this.results[timestamp];
       this.removedResults.push(timestamp);
+    },
+    updateResult(timestamp) {
+      const element = document.querySelector(
+        "[data-timestamp='" + timestamp + "'] .result-body",
+      );
+      element.scrollTop = element.scrollHeight;
     },
   },
   components: {

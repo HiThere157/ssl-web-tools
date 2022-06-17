@@ -55,7 +55,10 @@ export default {
       this.isExpanded = !this.isExpanded;
     },
   },
-  emit: ["removeResult"],
+  updated() {
+    this.$emit("updateResult");
+  },
+  emit: ["removeResult", "updateResult"],
   components: {
     CloseIcon,
     ChevronIcon,
