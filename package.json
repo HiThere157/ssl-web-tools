@@ -4,9 +4,10 @@
   "scripts": {
     "dev.vue": "vite",
     "dev.node": "nodemon server/server.js",
-    "build": "vite build",
-    "test": "jest",
-    "start": "vite build && node server/server.js"
+    "build.vue": "vite build",
+    "build.docker": "vite build && docker build -t ssl-web-tools:1.0 -f docker/Dockerfile .",
+    "start": "vite build && node server/server.js",
+    "test": "jest"
   },
   "dependencies": {
     "compression": "^1.7.4",
