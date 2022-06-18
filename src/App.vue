@@ -1,15 +1,48 @@
 <template>
   <Header />
+  <Banner
+    v-if="socketErrorVisible"
+    title="Socket Error"
+    description="Cannot connect to Socket! Running Tests is currently not available"
+  />
   <div class="content">
     <TestSelect />
     <TestResult />
   </div>
 </template>
 
-<script setup>
+<script>
 import Header from "./components/Header.vue";
+import Banner from "./components/Banner.vue";
 import TestSelect from "./components/TestSelect.vue";
 import TestResult from "./components/TestResult.vue";
+
+export default {
+  data() {
+    return {
+      socketErrorVisible: true,
+    };
+  },
+  mounted() {
+    this.$socket.on("disconnect", () => {
+      this.socketErrorVisible = true;
+    });
+
+    this.$socket.on("connect", () => {
+      this.socketErrorVisible = false;
+    });
+  },
+  destroyed() {
+    this.$socket.off("disconnect");
+    this.$socket.off("connect");
+  },
+  components: {
+    Header,
+    Banner,
+    TestSelect,
+    TestResult,
+  },
+};
 </script>
 
 <style>

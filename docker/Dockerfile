@@ -1,7 +1,7 @@
 FROM node:slim
 
 RUN apt update && apt install -y \
-  dnsutils nmap traceroute \
+  iputils-ping dnsutils nmap traceroute \
   dos2unix bsdmainutils procps
 
 COPY ./dist /app/dist

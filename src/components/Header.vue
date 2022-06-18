@@ -8,7 +8,7 @@
 
 <script></script>
 
-<style>
+<style scoped>
 .header {
   width: 100%;
   padding: 0.4rem;
