@@ -1,6 +1,6 @@
 <template>
-  <div class="container" style="margin-left: 0">
-    <h1 class="container-title">Run Test</h1>
+  <div>
+    <h1>Run Test</h1>
 
     <Result
       v-for="result in results"
@@ -60,4 +60,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+/* div container and h1 styled in App.vue */
+</style>

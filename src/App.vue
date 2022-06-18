@@ -16,26 +16,31 @@ import TestResult from "./components/TestResult.vue";
 @import "./assets/base.css";
 
 #app {
+  min-width: calc(var(--container-min-width) + 1rem);
   display: flex;
-  flex-direction: column;
   height: 100vh;
+  flex-direction: column;
 }
 
 .content {
+  height: 100%;
   display: flex;
-  flex-grow: 1;
-  min-height: fit-content;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  padding: 0.5rem;
 }
 
-.container {
+.content > * {
+  min-width: calc(--container-min-width);
+  flex: 1;
   padding: 0.75rem 1.5rem;
-  margin: 0.75rem;
-  width: 100%;
   border-radius: 0.4rem;
   background-color: var(--color-background-soft);
 }
 
-.container-title {
+.content > * > h1 {
   margin-bottom: 0.5rem;
   color: var(--color-heading);
 }

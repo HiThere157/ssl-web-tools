@@ -10,6 +10,7 @@
 
 <style>
 .header {
+  width: 100%;
   padding: 0.4rem;
   background-color: var(--color-background-mute);
 }

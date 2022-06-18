@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h1 class="container-title">Run Tests</h1>
+  <div>
+    <h1>Run Tests</h1>
 
     <div class="tab-container">
       <Tab title="SSL" route="/" />
@@ -24,7 +24,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+/* div container and h1 styled in App.vue */
+
 .tab-container {
   display: flex;
   justify-content: start;
