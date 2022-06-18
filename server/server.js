@@ -28,11 +28,11 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("runSSL", (data, callback) => {
-    const { target } = data;
+    const { target, port, useSelfSigned } = data;
     const timestamp = new Date().getTime();
     const title = "SSL Test of '" + target + "'";
 
-    if (!validateHost(target)) {
+    if (!validateHost(target) || !validateInt(port, 1, 65535)) {
       return sendStatusUpdate(
         socket,
         timestamp,
@@ -43,7 +43,9 @@ io.on("connection", (socket) => {
     }
 
     const args = [];
-    args.push(target);
+    if (useSelfSigned) args.push("--add-ca");
+    if (useSelfSigned) args.push("/certs/*.pem");
+    args.push(target + ":" + port);
 
     const cmd = spawn("testssl.sh", args);
     sendResponse(socket, timestamp, title, cmd);
@@ -147,6 +149,7 @@ io.on("connection", (socket) => {
 
     const args = [];
     args.push("-m " + maxHops);
+    args.push("-I");
     args.push(target);
 
     const cmd = spawn("traceroute", args);

@@ -2,33 +2,39 @@ const Convert = require("ansi-to-html");
 const convert = new Convert();
 
 function sendResponse(socket, timestamp, title, cmd) {
-  const sendData = (data) => {
+  const sendData = (data, status) => {
     socket.emit("newResultData", {
       timestamp,
       title,
+      status,
       command: cmd.spawnargs.join(" "),
       data: convert.toHtml(data.toString()),
     });
   };
 
-  cmd.stdout.on("data", sendData);
-  cmd.stderr.on("data", sendData);
+  cmd.stdout.on("data", (data) => {
+    sendData(data, "pending");
+  });
+  cmd.stderr.on("data", (data) => {
+    sendData(data, "error");
+  });
 
   cmd.on("error", (error) => {
-    sendStatusUpdate(socket, timestamp, title, "error", error.message);
+    sendData(error.message, "error");
   });
 
   cmd.on("close", (code) => {
-    sendStatusUpdate(socket, timestamp, title, "complete", code);
+    sendData(" (Status: " + code + ")", "complete");
   });
 }
 
 function sendStatusUpdate(socket, timestamp, title, status, data) {
-  socket.emit("newResultStatus", {
+  socket.emit("newResultData", {
     timestamp,
     title,
     status,
-    data,
+    command: undefined,
+    data: convert.toHtml(data.toString()),
   });
 }
 

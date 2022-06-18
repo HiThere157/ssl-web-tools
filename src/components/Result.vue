@@ -20,7 +20,13 @@
       </div>
     </div>
 
-    <div v-html="$sanitize(body)" class="result-body" :class="{ 'result-expanded': isExpanded }"></div>
+    <div v-if="command" class="result-command">> {{ command }}</div>
+
+    <div
+      v-html="$sanitize(body)"
+      class="result-body"
+      :class="{ 'result-expanded': isExpanded }"
+    ></div>
   </div>
 </template>
 
@@ -38,6 +44,10 @@ export default {
       type: String,
       required: true,
     },
+    command: {
+      type: String,
+      required: true,
+    },
     body: {
       type: String,
       required: true,
@@ -51,6 +61,7 @@ export default {
   methods: {
     toggleExpanded() {
       this.isExpanded = !this.isExpanded;
+      console.log(this.command)
     },
   },
   updated() {
@@ -73,6 +84,14 @@ export default {
   overflow: hidden;
 }
 
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  color: var(--vt-c-text-light-1);
+}
+
 .result-pending {
   background-color: var(--custom-orange);
 }
@@ -85,14 +104,6 @@ export default {
   background-color: var(--custom-red);
 }
 
-.result-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem;
-  color: var(--vt-c-text-light-1);
-}
-
 .result-action {
   display: flex;
   column-gap: 0.5rem;
@@ -102,6 +113,13 @@ export default {
   height: 2rem;
   aspect-ratio: 1;
   padding: 0.25rem;
+}
+
+.result-command {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-background);
+  border-bottom: 0.2rem solid var(--color-border);
+  font-family: Consolas, monaco, monospace;
 }
 
 .result-body {

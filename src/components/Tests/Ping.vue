@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname..." />
+  <Text label="Target" v-model="target" placeholder="Hostname" />
   <Text label="Count" :onlyNumbers="true" v-model="count" />
 
   <hr />

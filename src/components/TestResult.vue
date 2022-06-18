@@ -6,6 +6,7 @@
       v-for="result in results"
       :title="result.title"
       :status="result.status"
+      :command="result.command"
       :body="result.data.trim()"
       @removeResult="removeResult(result.timestamp)"
     ></Result>
@@ -24,29 +25,17 @@ export default {
   },
   mounted() {
     this.$socket.on("newResultData", (result) => {
-      const { timestamp, data } = result;
-
-      if (this.removedResults.includes(timestamp)) return;
-      if (!this.results[timestamp]) this.addResult(result);
-
-      this.results[timestamp].data += data;
-    });
-
-    this.$socket.on("newResultStatus", (result) => {
       const { timestamp, status, data } = result;
 
       if (this.removedResults.includes(timestamp)) return;
       if (!this.results[timestamp]) this.addResult(result);
 
       this.results[timestamp].status = status;
-      if (status === "error") {
-        this.results[timestamp].data += data;
-      }
+      this.results[timestamp].data += data;
     });
   },
   destroyed() {
     this.$socket.off("newResultData");
-    this.$socket.off("newResultStatus");
   },
   methods: {
     addResult(result) {
@@ -56,7 +45,8 @@ export default {
         timestamp,
         title,
         status: "pending",
-        data: command ? "> " + command + "\n\n" : "",
+        command,
+        data: "",
       };
     },
     removeResult(timestamp) {

@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname..." />
+  <Text label="Target" v-model="target" placeholder="Hostname" />
   <Checkbox label="Service Detection" v-model="serviceDetection" />
   <Checkbox label="OS Detection" v-model="OSDetection" />
   <Select label="Timing" v-model="timing" :options="timingOptions" />
@@ -9,7 +9,7 @@
     v-if="portOption === 'custom'"
     label="TCP Ports"
     v-model="TCPPorts"
-    placeholder="Comma separated list of ports..."
+    placeholder="Comma separated list of ports"
   />
 
   <Checkbox label="Verbose" v-model="verbose" />

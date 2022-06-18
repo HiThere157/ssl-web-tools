@@ -1,6 +1,6 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname..." />
-  <Text label="DNS" v-model="dns" placeholder="DNS Server..." />
+  <Text label="Target" v-model="target" placeholder="Hostname" />
+  <Text label="DNS" v-model="dns" placeholder="DNS Server" />
   <Checkbox label="Reverse" v-model="reverse" />
 
   <hr />
