@@ -1,22 +1,31 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="example.com" />
-  <Checkbox label="Service Detection" v-model="serviceDetection" />
-  <Checkbox label="OS Detection" v-model="OSDetection" />
-  <Select label="Timing" v-model="timing" :options="timingOptions" />
+  <Text label="Target" v-model="nmap.target" placeholder="example.com" />
+  <Checkbox label="Service Detection" v-model="nmap.serviceDetection" />
+  <Checkbox label="OS Detection" v-model="nmap.OSDetection" />
+  <Select label="Timing" v-model="nmap.timing" :options="timingOptions" />
 
-  <Select label="Select Ports" v-model="portOption" :options="portOptions" />
+  <Select
+    label="Select Ports"
+    v-model="nmap.portOption"
+    :options="portOptions"
+  />
   <Text
-    v-if="portOption === 'custom'"
+    v-if="nmap.portOption === 'custom'"
     label="TCP Ports"
-    v-model="TCPPorts"
+    v-model="nmap.TCPPorts"
     placeholder="Comma separated list of ports"
   />
 
-  <Checkbox label="Verbose" v-model="verbose" />
+  <Checkbox label="Verbose" v-model="nmap.verbose" />
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="runTest">Run Test</button>
+    <button
+      class="green-pill fs-1 fw-bold"
+      @click="$socket.emit('runNmap', nmap)"
+    >
+      Run Test
+    </button>
   </div>
 </template>
 
@@ -25,18 +34,16 @@ import Text from "../Input/Text.vue";
 import Checkbox from "../Input/Checkbox.vue";
 import Select from "../Input/Select.vue";
 
+import { storeToRefs } from "pinia";
+import { useConfigStore } from "../../stores/appConfig.js";
+
 export default {
-  data() {
+  setup() {
+    const config = useConfigStore();
+    const { nmap } = storeToRefs(config);
+
     return {
-      target: "",
-      serviceDetection: true,
-      OSDetection: true,
-      timing: "T3",
-
-      portOption: "T1000",
-      TCPPorts: "",
-
-      verbose: false,
+      nmap,
     };
   },
   computed: {
@@ -53,21 +60,6 @@ export default {
         T3: "Normal",
         T2: "Polite",
       };
-    },
-  },
-  methods: {
-    runTest() {
-      this.$socket.emit("runNmap", {
-        target: this.target,
-        serviceDetection: this.serviceDetection,
-        OSDetection: this.OSDetection,
-        timing: this.timing,
-
-        portOption: this.portOption,
-        TCPPorts: this.TCPPorts,
-
-        verbose: this.verbose,
-      });
     },
   },
   components: {

@@ -1,30 +1,32 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="example.com" />
-  <Text label="Count" :onlyNumbers="true" v-model="count" />
+  <Text label="Target" v-model="ping.target" placeholder="example.com" />
+  <Text label="Count" :onlyNumbers="true" v-model="ping.count" />
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="runTest">Run Test</button>
+    <button
+      class="green-pill fs-1 fw-bold"
+      @click="$socket.emit('runPing', ping)"
+    >
+      Run Test
+    </button>
   </div>
 </template>
 
 <script>
 import Text from "../Input/Text.vue";
 
+import { storeToRefs } from "pinia";
+import { useConfigStore } from "../../stores/appConfig.js";
+
 export default {
-  data() {
+  setup() {
+    const config = useConfigStore();
+    const { ping } = storeToRefs(config);
+
     return {
-      target: "",
-      count: 10,
+      ping,
     };
-  },
-  methods: {
-    runTest() {
-      this.$socket.emit("runPing", {
-        target: this.target,
-        count: this.count,
-      });
-    },
   },
   components: {
     Text,

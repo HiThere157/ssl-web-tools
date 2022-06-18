@@ -1,11 +1,21 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="example.com" />
-  <Text label="Port" :onlyNumbers="true" v-model="port" placeholder="Port" />
-  <Checkbox label="Use Self-Signed Certificates" v-model="useSelfSigned" />
+  <Text label="Target" v-model="ssl.target" placeholder="example.com" />
+  <Text
+    label="Port"
+    :onlyNumbers="true"
+    v-model="ssl.port"
+    placeholder="Port"
+  />
+  <Checkbox label="Use Self-Signed Certificates" v-model="ssl.useSelfSigned" />
 
   <hr />
   <div class="justify-right">
-    <button class="green-pill fs-1 fw-bold" @click="runTest">Run Test</button>
+    <button
+      class="green-pill fs-1 fw-bold"
+      @click="$socket.emit('runSSL', ssl)"
+    >
+      Run Test
+    </button>
   </div>
 </template>
 
@@ -13,22 +23,17 @@
 import Text from "../Input/Text.vue";
 import Checkbox from "../Input/Checkbox.vue";
 
+import { storeToRefs } from "pinia";
+import { useConfigStore } from "../../stores/appConfig.js";
+
 export default {
-  data() {
+  setup() {
+    const config = useConfigStore();
+    const { ssl } = storeToRefs(config);
+
     return {
-      target: "",
-      port: 443,
-      useSelfSigned: false,
+      ssl,
     };
-  },
-  methods: {
-    runTest() {
-      this.$socket.emit("runSSL", {
-        target: this.target,
-        port: this.port,
-        useSelfSigned: this.useSelfSigned,
-      });
-    },
   },
   components: {
     Text,

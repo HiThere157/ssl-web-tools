@@ -35,7 +35,7 @@ app.get("/config.json", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("runSSL", (data, callback) => {
-    if (!getConfig()["ssl"].enabled) return;
+    if (!getConfig()["ssl"]._enabled) return;
 
     const { target, port, useSelfSigned } = data;
     const timestamp = new Date().getTime();
@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runPing", (data, callback) => {
-    if (!getConfig()["ping"].enabled) return;
+    if (!getConfig()["ping"]._enabled) return;
 
     const { target, count } = data;
     const timestamp = new Date().getTime();
@@ -86,7 +86,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runDig", (data, callback) => {
-    if (!getConfig()["dig"].enabled) return;
+    if (!getConfig()["dig"]._enabled) return;
 
     const { target, dns, reverse } = data;
     const timestamp = new Date().getTime();
@@ -112,7 +112,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runNmap", (data, callback) => {
-    if (!getConfig()["nmap"].enabled) return;
+    if (!getConfig()["nmap"]._enabled) return;
 
     const { target, serviceDetection, OSDetection, timing } = data;
     const { portOption, TCPPorts, verbose } = data;
@@ -148,7 +148,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runTraceroute", (data, callback) => {
-    if (!getConfig()["traceroute"].enabled) return;
+    if (!getConfig()["traceroute"]._enabled) return;
 
     const { target, maxHops } = data;
     const timestamp = new Date().getTime();

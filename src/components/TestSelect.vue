@@ -3,11 +3,11 @@
     <h1>Run Tests</h1>
 
     <div class="tab-container">
-      <Tab title="SSL" route="/" />
-      <Tab title="Ping" route="/ping" />
-      <Tab title="Dig" route="/dig" />
-      <Tab title="Nmap" route="/nmap" />
-      <Tab title="Traceroute" route="/traceroute" />
+      <Tab v-if="ssl._enabled" title="SSL" route="/ssl" />
+      <Tab v-if="ping._enabled" title="Ping" route="/ping" />
+      <Tab v-if="dig._enabled" title="Dig" route="/dig" />
+      <Tab v-if="nmap._enabled" title="Nmap" route="/nmap" />
+      <Tab v-if="traceroute._enabled" title="Traceroute" route="/traceroute" />
     </div>
 
     <router-view></router-view>
@@ -17,7 +17,24 @@
 <script>
 import Tab from "./Tab.vue";
 
+import { storeToRefs } from "pinia";
+import { useConfigStore } from "../stores/appConfig.js";
+
 export default {
+  setup() {
+    const config = useConfigStore();
+    config.fetchConfig();
+
+    const { ssl, ping, dig, nmap, traceroute } = storeToRefs(config);
+
+    return {
+      ssl,
+      ping,
+      dig,
+      nmap,
+      traceroute,
+    };
+  },
   components: {
     Tab,
   },
@@ -32,10 +49,5 @@ export default {
   justify-content: start;
   column-gap: 1rem;
   margin-bottom: 1rem;
-}
-
-.justify-right {
-  display: flex;
-  justify-content: flex-end;
 }
 </style>

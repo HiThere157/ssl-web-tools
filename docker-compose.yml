@@ -4,3 +4,6 @@ services:
     image: ssl-web-tools:1.0
     ports:
       - "9500:9000"
+    volumes:
+      - ./config:/app/server/config
+      - ./certs:/certs

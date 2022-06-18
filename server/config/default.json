@@ -1,46 +1,34 @@
 {
   "ssl": {
-    "enabled": false,
-    "settings": {
-      "target": "test",
-      "port": 443,
-      "useSelfSigned": false
-    }
+    "_enabled": true,
+    "target": "",
+    "port": 443,
+    "useSelfSigned": false
   },
   "ping": {
-    "enabled": true,
-    "settings": {
-      "target": "test",
-      "count": 10
-    }
+    "_enabled": true,
+    "target": "",
+    "count": 10
   },
   "dig": {
-    "enabled": true,
-    "settings": {
-      "target": "test",
-      "dns": "test2",
-      "reverse": false
-    }
+    "_enabled": true,
+    "target": "",
+    "dns": "",
+    "reverse": false
   },
   "nmap": {
-    "enabled": true,
-    "settings": {
-      "target": "test",
-      "serviceDetection": true,
-      "OSDetection": true,
-      "timing": "T3",
-
-      "portOption": "T1000",
-      "TCPPorts": "",
-
-      "verbose": false
-    }
+    "_enabled": true,
+    "target": "",
+    "serviceDetection": true,
+    "OSDetection": true,
+    "timing": "T3",
+    "portOption": "T1000",
+    "TCPPorts": "",
+    "verbose": false
   },
   "traceroute": {
-    "enabled": true,
-    "settings": {
-      "target": "test",
-      "maxHops": 30
-    }
+    "_enabled": true,
+    "target": "",
+    "maxHops": 30
   }
 }
