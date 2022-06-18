@@ -1,12 +1,15 @@
 <template>
   <div class="header">
     <div class="header-title">
+      <Favicon class="header-icon" />
       <h1>SSL Web Tools</h1>
     </div>
   </div>
 </template>
 
-<script></script>
+<script setup>
+import Favicon from "./Icons/Favicon.vue";
+</script>
 
 <style scoped>
 .header {
@@ -16,7 +19,15 @@
 }
 
 .header-title {
-  margin-left: 0.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  column-gap: 0.75rem;
   color: var(--color-heading);
+}
+
+.header-icon {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 </style>
