@@ -32,7 +32,7 @@ export default {
   },
   components: {
     Text,
-    Checkbox
+    Checkbox,
   },
 };
 </script>

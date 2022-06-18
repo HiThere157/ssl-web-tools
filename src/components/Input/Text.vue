@@ -14,7 +14,7 @@
               ? $event.target.value === ''
                 ? 0
                 : Number($event.target.value)
-              : $event.target.value
+              : $event.target.value,
           )
         "
       />
