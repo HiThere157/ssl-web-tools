@@ -7,7 +7,7 @@ const { Server } = require("socket.io");
 const path = require("path");
 const { spawn } = require("child_process");
 
-const getConfig = require("./utils/getConfig");
+const { getConfig, copyDefaultConfig } = require("./utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("./utils/sendResponse");
 const {
   validateHost,
@@ -24,6 +24,8 @@ const appPath = path.resolve(__dirname + "/../dist/") + "/";
 
 app.use(express.static(appPath));
 app.use(compression());
+
+copyDefaultConfig();
 
 app.get("/", (req, res) => {
   res.sendFile(appPath + "index.html");

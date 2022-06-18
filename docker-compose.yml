@@ -5,5 +5,5 @@ services:
     ports:
       - "9500:9000"
     volumes:
-      - ./config:/app/server/config
+      - ./config:/app/config
       - ./certs:/certs

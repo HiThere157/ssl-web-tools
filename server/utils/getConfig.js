@@ -1,12 +1,20 @@
 const fs = require("fs");
 const path = require("path");
 
-const confPath = path.resolve(__dirname + "/../config/") + "/";
-const confName = process.env.CONF_NAME || "default";
+const confDefaultFile = path.resolve(__dirname + "/../config/default.json");
+const confFile = path.resolve(__dirname + "/../../config/default.json");
 
 function getConfig() {
-  const configString = fs.readFileSync(confPath + confName + ".json");
+  copyDefaultConfig();
+
+  const configString = fs.readFileSync(confFile);
   return JSON.parse(configString);
 }
 
-module.exports = getConfig;
+function copyDefaultConfig() {
+  if (!fs.existsSync(confFile)) {
+    fs.copyFileSync(confDefaultFile, confFile);
+  }
+}
+
+module.exports = { getConfig, copyDefaultConfig };
