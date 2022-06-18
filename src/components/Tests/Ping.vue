@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname" />
+  <Text label="Target" v-model="target" placeholder="example.com" />
   <Text label="Count" :onlyNumbers="true" v-model="count" />
 
   <hr />
@@ -14,7 +14,7 @@ import Text from "../Input/Text.vue";
 export default {
   data() {
     return {
-      target: "www.google.de",
+      target: "",
       count: 10,
     };
   },

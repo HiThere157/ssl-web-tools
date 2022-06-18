@@ -6,7 +6,8 @@
     "dev.node": "nodemon server/server.js",
     "build.vue": "vite build",
     "build.docker": "vite build && docker build -t ssl-web-tools:1.0 -f docker/Dockerfile .",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier -w ."
   },
   "dependencies": {
     "ansi-to-html": "^0.7.2",

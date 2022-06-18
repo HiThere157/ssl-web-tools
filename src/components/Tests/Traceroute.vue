@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname" />
+  <Text label="Target" v-model="target" placeholder="example.com" />
   <Text label="Max Hops" :onlyNumbers="true" v-model="maxHops" />
 
   <hr />
@@ -14,7 +14,7 @@ import Text from "../Input/Text.vue";
 export default {
   data() {
     return {
-      target: "www.google.de",
+      target: "",
       maxHops: 30,
     };
   },

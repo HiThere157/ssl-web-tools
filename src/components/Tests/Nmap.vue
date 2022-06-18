@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname" />
+  <Text label="Target" v-model="target" placeholder="example.com" />
   <Checkbox label="Service Detection" v-model="serviceDetection" />
   <Checkbox label="OS Detection" v-model="OSDetection" />
   <Select label="Timing" v-model="timing" :options="timingOptions" />
@@ -28,7 +28,7 @@ import Select from "../Input/Select.vue";
 export default {
   data() {
     return {
-      target: "www.google.de",
+      target: "",
       serviceDetection: true,
       OSDetection: true,
       timing: "T3",

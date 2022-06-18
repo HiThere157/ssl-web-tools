@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname" />
+  <Text label="Target" v-model="target" placeholder="example.com" />
   <Text label="Port" :onlyNumbers="true" v-model="port" placeholder="Port" />
   <Checkbox label="Use Self-Signed Certificates" v-model="useSelfSigned" />
 
@@ -16,7 +16,7 @@ import Checkbox from "../Input/Checkbox.vue";
 export default {
   data() {
     return {
-      target: "www.google.de",
+      target: "",
       port: 443,
       useSelfSigned: false,
     };

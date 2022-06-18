@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const compression = require("compression");
-const path = require("path");
 const http = require("http");
-const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+
+const path = require("path");
 const { spawn } = require("child_process");
 
+const getConfig = require("./utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("./utils/sendResponse");
 const {
   validateHost,
@@ -15,6 +15,9 @@ const {
   validateSelection,
   validatePortRange,
 } = require("./utils/validateInput");
+
+const server = http.createServer(app);
+const io = new Server(server);
 
 const port = 9000;
 const appPath = path.resolve(__dirname + "/../dist/") + "/";
@@ -26,8 +29,14 @@ app.get("/", (req, res) => {
   res.sendFile(appPath + "index.html");
 });
 
+app.get("/config.json", (req, res) => {
+  res.json(getConfig());
+});
+
 io.on("connection", (socket) => {
   socket.on("runSSL", (data, callback) => {
+    if (!getConfig()["ssl"].enabled) return;
+
     const { target, port, useSelfSigned } = data;
     const timestamp = new Date().getTime();
     const title = "SSL Test of '" + target + "'";
@@ -52,6 +61,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runPing", (data, callback) => {
+    if (!getConfig()["ping"].enabled) return;
+
     const { target, count } = data;
     const timestamp = new Date().getTime();
     const title = "Ping to '" + target + "'";
@@ -75,6 +86,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runDig", (data, callback) => {
+    if (!getConfig()["dig"].enabled) return;
+
     const { target, dns, reverse } = data;
     const timestamp = new Date().getTime();
     const title = "Dig to '" + target + "'";
@@ -99,6 +112,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runNmap", (data, callback) => {
+    if (!getConfig()["nmap"].enabled) return;
+
     const { target, serviceDetection, OSDetection, timing } = data;
     const { portOption, TCPPorts, verbose } = data;
     const timestamp = new Date().getTime();
@@ -133,6 +148,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("runTraceroute", (data, callback) => {
+    if (!getConfig()["traceroute"].enabled) return;
+
     const { target, maxHops } = data;
     const timestamp = new Date().getTime();
     const title = "Traceroute to '" + target + "'";

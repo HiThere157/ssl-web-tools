@@ -34,6 +34,7 @@ const overridenOptions = {
 
 const app = createApp(App);
 app.config.globalProperties.$socket = io();
+
 app.use(router);
 app.use(Vue3Sanitize, overridenOptions);
 app.mount("#app");

@@ -20,10 +20,14 @@ import TestResult from "./components/TestResult.vue";
 export default {
   data() {
     return {
-      socketErrorVisible: true,
+      socketErrorVisible: false,
     };
   },
   mounted() {
+    setTimeout(() => {
+      if (this.$socket.disconnected) this.socketErrorVisible = true;
+    }, 2500);
+
     this.$socket.on("disconnect", () => {
       this.socketErrorVisible = true;
     });

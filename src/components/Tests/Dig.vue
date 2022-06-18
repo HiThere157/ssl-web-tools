@@ -1,5 +1,5 @@
 <template>
-  <Text label="Target" v-model="target" placeholder="Hostname" />
+  <Text label="Target" v-model="target" placeholder="example.com" />
   <Text label="DNS" v-model="dns" placeholder="DNS Server" />
   <Checkbox label="Reverse" v-model="reverse" />
 
@@ -16,7 +16,7 @@ import Checkbox from "../Input/Checkbox.vue";
 export default {
   data() {
     return {
-      target: "www.google.de",
+      target: "",
       dns: "",
       reverse: false,
     };

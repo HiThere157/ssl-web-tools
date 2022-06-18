@@ -1,0 +1,46 @@
+{
+  "ssl": {
+    "enabled": false,
+    "settings": {
+      "target": "test",
+      "port": 443,
+      "useSelfSigned": false
+    }
+  },
+  "ping": {
+    "enabled": true,
+    "settings": {
+      "target": "test",
+      "count": 10
+    }
+  },
+  "dig": {
+    "enabled": true,
+    "settings": {
+      "target": "test",
+      "dns": "test2",
+      "reverse": false
+    }
+  },
+  "nmap": {
+    "enabled": true,
+    "settings": {
+      "target": "test",
+      "serviceDetection": true,
+      "OSDetection": true,
+      "timing": "T3",
+
+      "portOption": "T1000",
+      "TCPPorts": "",
+
+      "verbose": false
+    }
+  },
+  "traceroute": {
+    "enabled": true,
+    "settings": {
+      "target": "test",
+      "maxHops": 30
+    }
+  }
+}
