@@ -1,15 +1,13 @@
 <template>
   <div class="header">
     <div class="header-title">
-      <Favicon class="header-icon" />
+      <img class="header-icon" src="/favicon.svg" />
       <h1>SSL Web Tools</h1>
     </div>
   </div>
 </template>
 
-<script setup>
-import Favicon from "./Icons/Favicon.vue";
-</script>
+<script></script>
 
 <style scoped>
 .header {

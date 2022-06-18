@@ -1,19 +1,59 @@
-# ssl-web-tools
+# SSL Web Tools
 
-This template should help get you started developing with Vue 3 in Vite.
+<div align="center" width="100%">
+  <img src="./public/favicon.svg" width="128" alt="" />
+</div>
 
-## Recommended IDE Setup
+\
+SSL Web Tools is a collection of tools to help you configure and set up new HTTPS websites.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
+## 📐 Current Features
 
-## Project Setup
+- Fancy, and Fast Web Interface
+- SSL Auditing Tool [testssl.sh](https://github.com/drwetter/testssl.sh) by [drwetter](https://github.com/drwetter)
+- Ping
+- DNS Lookup with [dig](https://manpages.ubuntu.com/manpages/jammy/en/man1/dig.1.html)
+- Nmap Scanner [nmap](https://nmap.org/)
+- Traceroute
 
-```sh
-npm install
+## 🔨 Installation
+
+### 🐳 Docker
+
+```bash
+docker run -d -p 9000:9000 --name hithere157/ssl-web-tools ssl-web-tools:1.0
 ```
 
-### Compile and start node server
+After the container is started, you can access it via the following URL: http://localhost:9000
 
-```sh
-npm run start
+### 🐙 Docker Compose
+
+An Example of a Docker Compose File:
+
+```yaml
+version: "3.9"
+services:
+  web:
+    image: hithere157/ssl-web-tools:1.0
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./config:/app/config
+      - ./certs:/certs
 ```
+
+To start the container, run:
+
+```bash
+docker-compose up -d
+```
+
+Again, you can access it via the following URL: http://localhost:9000
+
+## 💡 Advanced Configuration
+
+Additional Root Certificates for SSL/TLS Tests can be added to the `/certs` directory via a [docker volume](https://docs.docker.com/storage/volumes/).
+
+\
+After the container is started, a default configuration is created in the `/app/config` directory. You can edit this file to change the default values of all the settings for individual tools. \
+You will need a [docker volume](https://docs.docker.com/storage/volumes/) to save the configuration file between container restarts.
