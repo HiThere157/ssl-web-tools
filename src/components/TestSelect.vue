@@ -10,7 +10,9 @@
       <Tab v-if="traceroute._enabled" title="Traceroute" route="/traceroute" />
     </div>
 
-    <router-view></router-view>
+    <div class="test-container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -41,13 +43,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /* div container and h1 styled in App.vue */
 
 .tab-container {
   display: flex;
   justify-content: start;
   column-gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.test-container > * {
   margin-bottom: 1rem;
 }
 </style>

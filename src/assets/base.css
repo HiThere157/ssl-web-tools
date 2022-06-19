@@ -93,6 +93,11 @@ hr {
   justify-content: flex-end;
 }
 
+.justify-start {
+  display: flex;
+  justify-content: start;
+}
+
 .green-pill {
   padding: 0.5rem 1rem;
   background-color: var(--custom-green);

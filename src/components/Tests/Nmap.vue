@@ -1,7 +1,9 @@
 <template>
   <Text label="Target" v-model="nmap.target" placeholder="example.com" />
-  <Checkbox label="Service Detection" v-model="nmap.serviceDetection" />
-  <Checkbox label="OS Detection" v-model="nmap.OSDetection" />
+  <div class="justify-start" style="column-gap: 5rem">
+    <Checkbox label="Service Detection" v-model="nmap.serviceDetection" />
+    <Checkbox label="OS Detection" v-model="nmap.OSDetection" />
+  </div>
   <Select label="Timing" v-model="nmap.timing" :options="timingOptions" />
 
   <Select
