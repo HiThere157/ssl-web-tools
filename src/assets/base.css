@@ -68,6 +68,19 @@
   font-weight: normal;
 }
 
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-background-mute);
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-background-soft);
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);

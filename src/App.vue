@@ -70,7 +70,7 @@ export default {
 }
 
 .content > * {
-  min-width: calc(--container-min-width);
+  min-width: var(--container-min-width);
   flex: 1;
   padding: 0.75rem 1.5rem;
   border-radius: 0.4rem;
