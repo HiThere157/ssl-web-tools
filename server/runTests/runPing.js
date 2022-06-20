@@ -10,7 +10,7 @@ function runPing(data, socket) {
   const timestamp = new Date().getTime();
   const title = "Ping to '" + target + "'";
 
-  if (!validateHost(target) || !validateInt(count, 1, 25)) {
+  if (!validateHost(target) || !validateInt(count, 1, 1000)) {
     return sendStatusUpdate(socket, timestamp, title, "error", "Invalid Input");
   }
 
