@@ -61,7 +61,7 @@ If you want to use SSL Web Tools behind a reverse proxy, you need to configure t
 
 ## 💡 Advanced Configuration
 
-Additional Root Certificates for SSL/TLS Tests can be added to the `/certs` directory via a [docker volume](https://docs.docker.com/storage/volumes/).
+Additional Root Certificates for SSL/TLS Tests can be added to the `/certs` directory via a [docker volume](https://docs.docker.com/storage/volumes/). All Certificates must be in PEM format and must be named `<name>.pem`.
 
 After the container is started, a default configuration is created in the `/app/config` directory. You can edit this file to change the default values of all the settings for individual tools. \
 You will need a [docker volume](https://docs.docker.com/storage/volumes/) to save the configuration file between container restarts.
