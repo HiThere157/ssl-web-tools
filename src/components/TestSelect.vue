@@ -6,6 +6,7 @@
       <Tab v-if="ssl._enabled" title="SSL" route="/ssl" />
       <Tab v-if="ping._enabled" title="Ping" route="/ping" />
       <Tab v-if="dig._enabled" title="Dig" route="/dig" />
+      <Tab v-if="whois._enabled" title="Whois" route="/whois" />
       <Tab v-if="nmap._enabled" title="Nmap" route="/nmap" />
       <Tab v-if="traceroute._enabled" title="Traceroute" route="/traceroute" />
     </div>
@@ -26,13 +27,13 @@ export default {
   setup() {
     const config = useConfigStore();
     config.fetchConfig();
-
-    const { ssl, ping, dig, nmap, traceroute } = storeToRefs(config);
+    const { ssl, ping, dig, whois, nmap, traceroute } = storeToRefs(config);
 
     return {
       ssl,
       ping,
       dig,
+      whois,
       nmap,
       traceroute,
     };

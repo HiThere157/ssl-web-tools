@@ -1,8 +1,8 @@
 FROM node:slim
 
-RUN apt update && apt install -y \
-  iputils-ping dnsutils nmap traceroute \
-  dos2unix bsdmainutils procps
+RUN apt update && apt install -y --no-install-recommends \
+  iputils-ping dnsutils whois nmap traceroute \
+  dos2unix bsdmainutils procps ntp
 
 COPY ./dist /app/dist
 COPY ./server /app/server
@@ -17,5 +17,7 @@ WORKDIR /app
 RUN npm install
 
 EXPOSE 9000
+VOLUME [ "/app/config" ]
+VOLUME [ "/certs" ]
 
 CMD [ "node", "server/server.js", "--with-docker-volume" ]

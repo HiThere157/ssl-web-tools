@@ -8,6 +8,7 @@ import App from "./App.vue";
 import SSL from "./components/Tests/SSL.vue";
 import Ping from "./components/Tests/Ping.vue";
 import Dig from "./components/Tests/Dig.vue";
+import Whois from "./components/Tests/Whois.vue";
 import Nmap from "./components/Tests/Nmap.vue";
 import Traceroute from "./components/Tests/Traceroute.vue";
 
@@ -15,6 +16,7 @@ const routes = [
   { path: "/ssl", component: SSL },
   { path: "/ping", component: Ping },
   { path: "/dig", component: Dig },
+  { path: "/whois", component: Whois },
   { path: "/nmap", component: Nmap },
   { path: "/traceroute", component: Traceroute },
 ];

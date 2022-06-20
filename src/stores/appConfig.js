@@ -18,7 +18,12 @@ export const useConfigStore = defineStore("appConfig", {
         _enabled: true,
         target: "",
         dns: "",
+        type: "A",
         reverse: false,
+      },
+      whois: {
+        _enabled: true,
+        target: "",
       },
       nmap: {
         _enabled: true,
