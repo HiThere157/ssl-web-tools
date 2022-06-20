@@ -123,7 +123,7 @@ export default {
 }
 
 .result-body {
-  max-height: 10rem;
+  max-height: 15rem;
   overflow-y: auto;
   padding: 0.5rem;
   background-color: var(--color-background);
