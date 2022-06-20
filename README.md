@@ -28,7 +28,7 @@ More screenshots can be found in at the bottom of this page.
 ### 🐳 Docker
 
 ```bash
-docker run -d -p 9000:9000 --name hithere157/ssl-web-tools ssl-web-tools:1.0
+docker run -d -p 9000:9000 --name ssl-web-tools hithere157/ssl-web-tools:1.1
 ```
 
 After the container is started, you can access it via the following URL: http://localhost:9000
@@ -41,7 +41,7 @@ An Example of a Docker Compose File:
 version: "3.9"
 services:
   web:
-    image: hithere157/ssl-web-tools:1.0
+    image: hithere157/ssl-web-tools:1.1
     ports:
       - "9000:9000"
     volumes:
