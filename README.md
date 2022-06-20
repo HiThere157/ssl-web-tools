@@ -9,7 +9,9 @@ SSL Web Tools is a collection of tools to help you configure and set up new HTTP
 
 ## 📸 Screenshot
 
-<img src="./screenshots/SSL_test.png" width="700" alt="" />
+<div align="center" width="100%">
+  <img src="./screenshots/SSL_test.png" width="700" alt="" />
+</div>
 More screenshots can be found in at the bottom of this page.
 
 ## 📐 Current Features
@@ -73,6 +75,8 @@ If you have any suggestions for new tools or missing settings, please open an is
 
 ## 📸 Even More Screenshots
 
-<img src="./screenshots/Dig_test_multiple.png" width="700" alt="" />
-<img src="./screenshots/Nmap_test_pending.png" width="700" alt="" />
-<img src="./screenshots/SSL_test.png" width="700" alt="" />
+<div align="center" width="100%">
+  <img src="./screenshots/Dig_test_multiple.png" width="700" alt="" />
+  <img src="./screenshots/Nmap_test_pending.png" width="700" alt="" />
+  <img src="./screenshots/SSL_test.png" width="700" alt="" />
+</div>
