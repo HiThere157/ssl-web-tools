@@ -1,6 +1,7 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    class="chevron"
     :class="{ rotate: rotateUp }"
     viewBox="0 0 512 512"
   >
@@ -29,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+.chevron {
+  transition: var(--transition-time-1);
+}
 .rotate {
   transform: rotate(180deg);
 }

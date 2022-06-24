@@ -14,7 +14,12 @@
   --custom-green-mute: #00a087;
 
   --custom-orange: #ff9f43;
+  --custom-orange-soft: #ff8f00;
+  --custom-orange-mute: #ff7f00;
+
   --custom-red: #e53e3e;
+  --custom-red-soft: #e50000;
+  --custom-red-mute: #cc0000;
 
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
@@ -27,6 +32,7 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
   --container-min-width: 40rem;
+  --transition-time-1: 100ms;
 }
 
 /* semantic color variables for this project */
@@ -109,48 +115,6 @@ hr {
 .justify-start {
   display: flex;
   justify-content: start;
-}
-
-.green-pill {
-  padding: 0.5rem 1rem;
-  background-color: var(--custom-green);
-  color: var(--vt-c-text-light-1);
-  border-radius: 1.25rem;
-  border: none;
-  cursor: pointer;
-}
-
-.green-pill:hover {
-  background-color: var(--custom-green-soft);
-}
-
-.green-pill:active {
-  background-color: var(--custom-green-mute);
-}
-
-.green-pill:focus {
-  outline: 0.2rem solid var(--color-border);
-}
-
-.transparent-pill {
-  padding: 0.5rem 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: var(--vt-c-text-light-1);
-  border-radius: 1.25rem;
-  border: none;
-  cursor: pointer;
-}
-
-.transparent-pill:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.transparent-pill:active {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.transparent-pill:focus {
-  outline: 0.2rem solid var(--color-border);
 }
 
 .fs-0 {

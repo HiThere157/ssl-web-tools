@@ -3,7 +3,7 @@
     <span>{{ label }}</span>
     <label class="input-switch">
       <input
-        class="green-pill"
+        class="pill green-pill"
         type="checkbox"
         :checked="modelValue"
         @input="$emit('update:modelValue', $event.target.checked)"
@@ -55,6 +55,7 @@ export default {
   border: 0.2rem solid var(--color-border);
   background-color: var(--color-background);
   cursor: pointer;
+  transition: var(--transition-time-1);
 }
 
 .input-slider:before {
@@ -66,6 +67,7 @@ export default {
   bottom: 0.25rem;
   border-radius: 50%;
   background-color: var(--color-background-mute);
+  transition: var(--transition-time-1);
 }
 
 .input input:checked + .input-slider {

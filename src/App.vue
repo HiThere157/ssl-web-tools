@@ -51,6 +51,7 @@ export default {
 
 <style>
 @import "./assets/base.css";
+@import "./assets/pill.css";
 
 #app {
   min-width: calc(var(--container-min-width) + 1rem);

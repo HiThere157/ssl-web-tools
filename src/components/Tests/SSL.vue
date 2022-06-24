@@ -11,7 +11,7 @@
   <hr />
   <div class="justify-right">
     <button
-      class="green-pill fs-1 fw-bold"
+      class="pill green-pill fs-1 fw-bold"
       @click="$socket.emit('runSSL', ssl)"
     >
       Run Test

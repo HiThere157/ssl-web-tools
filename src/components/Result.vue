@@ -11,10 +11,10 @@
       <span class="fw-bold">{{ title }} - {{ status }}</span>
 
       <div class="result-action">
-        <button class="transparent-pill" @click="toggleExpanded()">
+        <button class="pill transparent-pill" @click="toggleExpanded()">
           <ChevronIcon :rotateUp="isExpanded" />
         </button>
-        <button class="transparent-pill" @click="$emit('removeResult')">
+        <button class="pill transparent-pill" @click="$emit('removeResult')">
           <CloseIcon />
         </button>
       </div>
@@ -26,7 +26,19 @@
       v-html="$sanitize(body)"
       class="result-body"
       :class="{ 'result-expanded': isExpanded }"
+      @scroll="updateScrollSticky()"
     ></div>
+
+    <ChevronIcon
+      v-if="!this.scrollSticky"
+      class="pill scroll-down"
+      :class="{
+        'orange-pill': status === 'pending',
+        'green-pill': status === 'complete',
+        'red-pill': status === 'error',
+      }"
+      @click="scrollToBottom(true)"
+    />
   </div>
 </template>
 
@@ -53,19 +65,40 @@ export default {
       required: true,
     },
   },
+  mounted() {
+    this.bodyElement = this.$el.querySelector(".result-body");
+  },
   data() {
     return {
+      bodyElement: null,
       isExpanded: false,
+      scrollSticky: true,
     };
   },
   methods: {
     toggleExpanded() {
       this.isExpanded = !this.isExpanded;
+      if (!this.isExpanded) {
+        setTimeout(() => {
+          this.scrollToBottom(true);
+        }, 150);
+      }
+    },
+    updateScrollSticky() {
+      this.scrollSticky =
+        this.bodyElement.scrollHeight -
+          this.bodyElement.scrollTop -
+          this.bodyElement.clientHeight <=
+        0;
+    },
+    scrollToBottom(smooth = false) {
+      if (smooth) this.bodyElement.classList.add("result-smooth");
+      this.bodyElement.scrollTop = this.bodyElement.scrollHeight;
+      if (smooth) this.bodyElement.classList.remove("result-smooth");
     },
   },
   updated() {
-    const bodyElement = this.$el.querySelector(".result-body");
-    bodyElement.scrollTop = bodyElement.scrollHeight;
+    if (this.scrollSticky) this.scrollToBottom();
   },
   emit: ["removeResult"],
   components: {
@@ -128,9 +161,24 @@ export default {
   background-color: var(--color-background);
   white-space: pre-wrap;
   font-family: Consolas, monaco, monospace;
+  transition: var(--transition-time-1);
+}
+
+.result-smooth {
+  scroll-behavior: smooth;
 }
 
 .result-expanded {
   max-height: 40rem;
+}
+
+.scroll-down {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 2.35rem;
+  aspect-ratio: 1;
+  padding: 0.25rem;
+  margin: 0.5rem 1rem;
 }
 </style>

@@ -1,0 +1,64 @@
+.pill {
+  padding: 0.5rem 1rem;
+  color: var(--vt-c-text-light-1);
+  border-radius: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-time-1);
+}
+
+.pill:focus {
+  outline: 0.2rem solid var(--color-border);
+}
+
+/* Green Pill */
+.green-pill {
+  background-color: var(--custom-green);
+}
+
+.green-pill:hover {
+  background-color: var(--custom-green-soft);
+}
+
+.green-pill:active {
+  background-color: var(--custom-green-mute);
+}
+
+/* Orange Pill */
+.orange-pill {
+  background-color: var(--custom-orange);
+}
+
+.orange-pill:hover {
+  background-color: var(--custom-orange-soft);
+}
+
+.orange-pill:active {
+  background-color: var(--custom-orange-mute);
+}
+
+/* Red Pill */
+.red-pill {
+  background-color: var(--custom-red);
+}
+
+.red-pill:hover {
+  background-color: var(--custom-red-soft);
+}
+
+.red-pill:active {
+  background-color: var(--custom-red-mute);
+}
+
+/* Transparent Pill */
+.transparent-pill {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.transparent-pill:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.transparent-pill:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}

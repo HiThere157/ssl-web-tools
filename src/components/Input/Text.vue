@@ -20,7 +20,7 @@
       />
       <button
         v-if="!onlyNumbers"
-        class="green-pill"
+        class="pill green-pill"
         @click="$emit('update:modelValue', '')"
       >
         <CloseIcon />
@@ -28,7 +28,7 @@
 
       <template v-else>
         <button
-          class="green-pill"
+          class="pill green-pill"
           @click="$emit('update:modelValue', Number(modelValue) + 1)"
         >
           <ChevronIcon :rotateUp="true" />
@@ -36,7 +36,7 @@
 
         <button
           v-if="onlyNumbers"
-          class="green-pill"
+          class="pill green-pill"
           @click="$emit('update:modelValue', Number(modelValue) - 1)"
         >
           <ChevronIcon />
@@ -93,6 +93,7 @@ export default {
   border-radius: 1.25rem;
   background-color: var(--color-background);
   color: var(--color-text);
+  transition: var(--transition-time-1);
 }
 
 .input input::-webkit-outer-spin-button,

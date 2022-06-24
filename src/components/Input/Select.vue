@@ -17,7 +17,7 @@
           {{ options[option] }}
         </div>
       </div>
-      <button class="green-pill" @click="isOpen = !isOpen">
+      <button class="pill green-pill" @click="isOpen = !isOpen">
         <ChevronIcon :rotateUp="isOpen" />
       </button>
     </div>
@@ -70,6 +70,7 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
+  transition: var(--transition-time-1);
 }
 
 .input-group .selected {
@@ -103,6 +104,7 @@ export default {
   padding: 0.5rem;
   padding-left: 1rem;
   cursor: pointer;
+  transition: var(--transition-time-1);
 }
 
 .input-group .input-items div:hover {

@@ -23,7 +23,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  linkExactActiveClass: "green-pill",
+  linkExactActiveClass: "pill green-pill",
   linkActiveClass: "",
   routes,
 });

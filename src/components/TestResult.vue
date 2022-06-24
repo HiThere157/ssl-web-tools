@@ -4,6 +4,7 @@
 
     <Result
       v-for="result in results"
+      :key="result.timestamp"
       :title="result.title"
       :status="result.status"
       :command="result.command"
