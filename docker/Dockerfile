@@ -18,6 +18,6 @@ RUN npm install
 
 EXPOSE 9000
 VOLUME [ "/app/config" ]
-VOLUME [ "/certs" ]
+VOLUME [ "/caCerts" ]
 
 CMD [ "node", "server/server.js", "--with-docker-volume" ]
