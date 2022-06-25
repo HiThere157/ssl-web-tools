@@ -4,6 +4,7 @@ export const useConfigStore = defineStore("appConfig", {
   state() {
     return {
       _version: null,
+      _dockerTag: null,
       ssl: {
         _enabled: true,
         target: "",

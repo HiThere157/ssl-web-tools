@@ -22,10 +22,7 @@
 
   <hr />
   <div class="justify-right">
-    <button
-      class="pill green-pill fs-1 fw-bold"
-      @click="$socket.emit('runNmap', nmap)"
-    >
+    <button class="pill green-pill fs-1" @click="$socket.emit('runNmap', nmap)">
       Run Test
     </button>
   </div>

@@ -4,14 +4,46 @@
       <img class="header-icon" src="/favicon.svg" />
       <h1>SSL Web Tools</h1>
     </div>
+    <a
+      v-if="newVersionAvailable"
+      href="https://github.com/HiThere157/ssl-web-tools/releases"
+      target="_blank"
+      class="pill green-pill"
+      >New Version Available!</a
+    >
   </div>
 </template>
 
-<script></script>
+<script>
+import { storeToRefs } from "pinia";
+import { useConfigStore } from "../stores/appConfig.js";
+
+export default {
+  setup() {
+    const config = useConfigStore();
+    const { _version, _dockerTag } = storeToRefs(config);
+
+    return {
+      _version,
+      _dockerTag,
+    };
+  },
+  computed: {
+    newVersionAvailable() {
+      return (
+        this._version && this._dockerTag && this._version != this._dockerTag
+      );
+    },
+  },
+};
+</script>
 
 <style scoped>
 .header {
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.4rem;
   background-color: var(--color-background-mute);
 }

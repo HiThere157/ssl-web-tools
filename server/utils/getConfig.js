@@ -16,6 +16,7 @@ function getConfig() {
   const configDefault = JSON.parse(configDefaultString);
 
   if (!useCustomFile) {
+    configDefault._dockerTag = getDockerTags();
     return configDefault;
   }
 
@@ -34,7 +35,26 @@ function getConfig() {
     fs.writeFileSync(configFile, JSON.stringify(mergedConfig, null, 2));
   }
 
+  config._dockerTag = getDockerTags();
   return config;
+}
+
+async function getDockerTags() {
+  try {
+    const response = await fetch(
+      "https://hub.docker.com/v2/repositories/hithere157/ssl-web-tools/tags",
+    );
+    if (response.ok) {
+      const data = await response.json();
+      const tags = data.results
+        .map((tag) => tag.name)
+        .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+
+      return tags[0];
+    }
+  } catch (error) {
+    console.log("Error fetching docker tags");
+  }
 }
 
 module.exports = getConfig;

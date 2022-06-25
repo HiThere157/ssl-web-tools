@@ -4,10 +4,7 @@
 
   <hr />
   <div class="justify-right">
-    <button
-      class="pill green-pill fs-1 fw-bold"
-      @click="$socket.emit('runPing', ping)"
-    >
+    <button class="pill green-pill fs-1" @click="$socket.emit('runPing', ping)">
       Run Test
     </button>
   </div>
