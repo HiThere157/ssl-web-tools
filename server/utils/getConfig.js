@@ -6,7 +6,7 @@ const useCustomFile = process.argv.includes("--with-docker-volume");
 const configDefaultFile = path.resolve(__dirname + "/../config/default.json");
 const configFile = path.resolve(__dirname + "/../../config/default.json");
 
-function getConfig() {
+async function getConfig() {
   // useCustomFile: only use a seperate user config file in the docker image. Otherwise use the default config file.
 
   // configDefault: default server side config, is updated when starting a new version
@@ -16,7 +16,7 @@ function getConfig() {
   const configDefault = JSON.parse(configDefaultString);
 
   if (!useCustomFile) {
-    configDefault._dockerTag = getDockerTags();
+    configDefault._dockerTag = await getDockerTags();
     return configDefault;
   }
 
@@ -35,7 +35,7 @@ function getConfig() {
     fs.writeFileSync(configFile, JSON.stringify(mergedConfig, null, 2));
   }
 
-  config._dockerTag = getDockerTags();
+  config._dockerTag = await getDockerTags();
   return config;
 }
 
