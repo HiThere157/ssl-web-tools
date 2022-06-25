@@ -28,7 +28,7 @@ More screenshots can be found in at the bottom of this page.
 ### 🐳 Docker
 
 ```bash
-docker run -d -p 9000:9000 --name ssl-web-tools hithere157/ssl-web-tools:1.1
+docker run -d -p 9000:9000 --name ssl-web-tools hithere157/ssl-web-tools:1.1.1
 ```
 
 After the container is started, you can access it via the following URL: http://localhost:9000
@@ -41,12 +41,12 @@ An Example of a Docker Compose File:
 version: "3.9"
 services:
   web:
-    image: hithere157/ssl-web-tools:1.1
+    image: hithere157/ssl-web-tools:1.1.1
     ports:
       - "9000:9000"
     volumes:
       - ./config:/app/config
-      - ./certs:/certs
+      - ./caCerts:/caCerts
 ```
 
 To start the container, run:
@@ -63,7 +63,7 @@ If you want to use SSL Web Tools behind a reverse proxy, you need to configure t
 
 ## 💡 Advanced Configuration
 
-Additional Root Certificates for SSL/TLS Tests can be added to the `/certs` directory via a [docker volume](https://docs.docker.com/storage/volumes/). All Certificates must be in PEM format and must be named `<name>.pem`.
+Additional Root Certificates for SSL/TLS Tests can be added to the `/caCerts` directory via a [docker volume](https://docs.docker.com/storage/volumes/). All Certificates must be in PEM format and must be named `<name>.pem`.
 
 After the container is started, a default configuration is created in the `/app/config` directory. You can edit this file to change the default values of all the settings for individual tools. \
 You will need a [docker volume](https://docs.docker.com/storage/volumes/) to save the configuration file between container restarts.

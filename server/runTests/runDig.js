@@ -1,5 +1,5 @@
 const { spawn } = require("child_process");
-const { getConfig } = require("../utils/getConfig");
+const getConfig = require("../utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("../utils/sendResponse");
 const { validateHost, validateSelection } = require("../utils/validateInput");
 

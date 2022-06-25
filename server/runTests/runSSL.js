@@ -1,5 +1,5 @@
 const { spawn } = require("child_process");
-const { getConfig } = require("../utils/getConfig");
+const getConfig = require("../utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("../utils/sendResponse");
 const { validateHost, validateInt } = require("../utils/validateInput");
 
@@ -16,7 +16,7 @@ function runSSL(data, socket) {
 
   const args = [];
   if (useSelfSigned) args.push("--add-ca");
-  if (useSelfSigned) args.push("/certs/*.pem");
+  if (useSelfSigned) args.push("/caCerts/*.pem");
   args.push(target + ":" + port);
 
   const cmd = spawn("testssl.sh", args);

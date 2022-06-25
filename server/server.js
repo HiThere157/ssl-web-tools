@@ -13,12 +13,14 @@ const getConfig = require("./utils/getConfig");
 
 let config = getConfig();
 
-const runSSL = require("./runTests/runSSL");
-const runPing = require("./runTests/runPing");
-const runDig = require("./runTests/runDig");
-const runWhois = require("./runTests/runWhois");
-const runNmap = require("./runTests/runNmap");
-const runTraceroute = require("./runTests/runTraceroute");
+const allTests = {
+  runSSL: require("./runTests/runSSL"),
+  runPing: require("./runTests/runPing"),
+  runDig: require("./runTests/runDig"),
+  runWhois: require("./runTests/runWhois"),
+  runNmap: require("./runTests/runNmap"),
+  runTraceroute: require("./runTests/runTraceroute"),
+};
 
 app.use(express.static(appPath));
 app.use(compression());
@@ -33,31 +35,13 @@ app.get("/config.json", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("runSSL", (data) => {
-    runSSL(data, socket);
-  });
-
-  socket.on("runPing", (data) => {
-    runPing(data, socket);
-  });
-
-  socket.on("runDig", (data) => {
-    runDig(data, socket);
-  });
-
-  socket.on("runWhois", (data) => {
-    runWhois(data, socket);
-  });
-
-  socket.on("runNmap", (data) => {
-    runNmap(data, socket);
-  });
-
-  socket.on("runTraceroute", (data) => {
-    runTraceroute(data, socket);
+  Object.keys(allTests).forEach((test) => {
+    socket.on(test, (data) => {
+      allTests[test](data, socket);
+    });
   });
 });
 
-server.listen(9000, () => {
-  console.log(`App backend listening on port 9000`);
+server.listen(process.env.APP_PORT || 9000, () => {
+  console.log("App backend running");
 });
