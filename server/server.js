@@ -10,8 +10,7 @@ const io = new Server(server);
 
 const appPath = path.resolve(__dirname + "/../dist/") + "/";
 const getConfig = require("./utils/getConfig");
-
-let config = getConfig();
+getConfig();
 
 const allTests = {
   runSSL: require("./runTests/runSSL"),
@@ -30,8 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/config.json", (req, res) => {
-  config = getConfig();
-  res.json(config);
+  res.json(getConfig());
 });
 
 io.on("connection", (socket) => {
