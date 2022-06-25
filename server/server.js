@@ -9,8 +9,9 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const appPath = path.resolve(__dirname + "/../dist/") + "/";
-const { getConfig, copyDefaultConfig } = require("./utils/getConfig");
-copyDefaultConfig();
+const getConfig = require("./utils/getConfig");
+
+let config = getConfig();
 
 const runSSL = require("./runTests/runSSL");
 const runPing = require("./runTests/runPing");
@@ -27,7 +28,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/config.json", (req, res) => {
-  res.json(getConfig());
+  config = getConfig();
+  res.json(config);
 });
 
 io.on("connection", (socket) => {

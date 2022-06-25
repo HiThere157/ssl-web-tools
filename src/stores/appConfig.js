@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useConfigStore = defineStore("appConfig", {
   state() {
     return {
+      _version: null,
       ssl: {
         _enabled: true,
         target: "",
