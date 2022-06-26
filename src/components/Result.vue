@@ -8,7 +8,11 @@
         'result-error': status === 'error',
       }"
     >
-      <span class="fw-bold">{{ title }} - {{ status }}</span>
+      <span>
+        <span class="fw-bold">{{ title }}</span> -
+        <span class="fw-bold">{{ capitalizeFirstLetter(status) }}</span> -
+        <span class="fw-bold">{{ timestampToTimeString(timestamp) }}</span>
+      </span>
 
       <div class="result-action">
         <button class="pill transparent-pill" @click="toggleExpanded()">
@@ -49,6 +53,10 @@ import ChevronIcon from "./Icons/Chevron.vue";
 export default {
   props: {
     title: {
+      type: String,
+      required: true,
+    },
+    timestamp: {
       type: String,
       required: true,
     },
@@ -95,6 +103,13 @@ export default {
       if (smooth) this.bodyElement.classList.add("result-smooth");
       this.bodyElement.scrollTop = this.bodyElement.scrollHeight;
       if (smooth) this.bodyElement.classList.remove("result-smooth");
+    },
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    timestampToTimeString(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleTimeString();
     },
   },
   updated() {

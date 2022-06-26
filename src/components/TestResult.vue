@@ -6,6 +6,7 @@
       v-for="result in results"
       :key="result.timestamp"
       :title="result.title"
+      :timestamp="result.timestamp"
       :status="result.status"
       :command="result.command"
       :body="result.data.trim()"

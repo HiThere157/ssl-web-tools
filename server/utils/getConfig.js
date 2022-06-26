@@ -6,7 +6,7 @@ const useCustomFile = process.argv.includes("--with-docker-volume");
 const configDefaultFile = path.resolve(__dirname + "/../config/default.json");
 const configFile = path.resolve(__dirname + "/../../config/default.json");
 
-async function getConfig() {
+function getConfig() {
   // useCustomFile: only use a seperate user config file in the docker image. Otherwise use the default config file.
 
   // configDefault: default server side config, is updated when starting a new version
@@ -16,7 +16,6 @@ async function getConfig() {
   const configDefault = JSON.parse(configDefaultString);
 
   if (!useCustomFile) {
-    configDefault._dockerTag = await getDockerTags();
     return configDefault;
   }
 
@@ -35,7 +34,6 @@ async function getConfig() {
     fs.writeFileSync(configFile, JSON.stringify(mergedConfig, null, 2));
   }
 
-  config._dockerTag = await getDockerTags();
   return config;
 }
 
@@ -46,15 +44,15 @@ async function getDockerTags() {
     );
     if (response.ok) {
       const data = await response.json();
-      const tags = data.results
-        .map((tag) => tag.name)
-        .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+      const tags = data.results.sort((a, b) =>
+        b.name.localeCompare(a.name, undefined, { numeric: true }),
+      );
 
-      return tags[0];
+      return tags;
     }
   } catch (error) {
     console.log("Error fetching docker tags");
   }
 }
 
-module.exports = getConfig;
+module.exports = { getConfig, getDockerTags };

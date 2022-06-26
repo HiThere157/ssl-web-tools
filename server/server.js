@@ -9,7 +9,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const appPath = path.resolve(__dirname + "/../dist/") + "/";
-const getConfig = require("./utils/getConfig");
+const { getConfig, getDockerTags } = require("./utils/getConfig");
 getConfig();
 
 const allTests = {
@@ -37,6 +37,10 @@ io.on("connection", (socket) => {
     socket.on(test, (data) => {
       allTests[test](data, socket);
     });
+  });
+
+  socket.on("getDockerTags", async () => {
+    socket.emit("dockerTags", await getDockerTags());
   });
 });
 

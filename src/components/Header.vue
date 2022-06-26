@@ -21,12 +21,25 @@ import { useConfigStore } from "../stores/appConfig.js";
 export default {
   setup() {
     const config = useConfigStore();
-    const { _version, _dockerTag } = storeToRefs(config);
+    const { _version } = storeToRefs(config);
 
     return {
       _version,
-      _dockerTag,
     };
+  },
+  data() {
+    return {
+      _dockerTag: null,
+    };
+  },
+  mounted() {
+    this.$socket.on("dockerTags", (tags) => {
+      this._dockerTag = tags[0].name;
+    });
+    this.$socket.emit("getDockerTags");
+  },
+  destroyed() {
+    this.$socket.off("dockerTags");
   },
   computed: {
     newVersionAvailable() {
