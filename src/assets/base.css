@@ -31,7 +31,6 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
-  --container-min-width: 40rem;
   --transition-time-1: 100ms;
 }
 

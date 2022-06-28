@@ -5,13 +5,21 @@
     title="Socket Error"
     description="Cannot connect to Socket! Running Tests is currently not available"
   />
-  <div class="content">
-    <TestSelect />
-    <TestResult />
-  </div>
+
+  <splitpanes class="content" :dblClickSplitter="false">
+    <pane>
+      <TestSelect />
+    </pane>
+    <pane>
+      <TestResult />
+    </pane>
+  </splitpanes>
 </template>
 
 <script>
+import { Splitpanes, Pane } from "splitpanes";
+import "splitpanes/dist/splitpanes.css";
+
 import Header from "./components/Header.vue";
 import Banner from "./components/Banner.vue";
 import TestSelect from "./components/TestSelect.vue";
@@ -41,6 +49,8 @@ export default {
     this.$socket.off("connect");
   },
   components: {
+    Splitpanes,
+    Pane,
     Header,
     Banner,
     TestSelect,
@@ -54,32 +64,47 @@ export default {
 @import "./assets/pill.css";
 
 #app {
-  min-width: calc(var(--container-min-width) + 1rem);
+  min-width: fit-content;
   display: flex;
   height: 100vh;
   flex-direction: column;
 }
 
 .content {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 0.5rem;
+  column-gap: 0.15rem;
   row-gap: 0.5rem;
   padding: 0.5rem;
 }
 
-.content > * {
-  min-width: var(--container-min-width);
-  flex: 1;
+.content > *:not(.splitpanes__splitter) {
   padding: 0.75rem 1.5rem;
   border-radius: 0.4rem;
   background-color: var(--color-background-soft);
+  min-width: min-content;
 }
 
-.content > * > h1 {
-  margin-bottom: 0.5rem;
-  color: var(--color-heading);
+.content > .splitpanes__splitter {
+  padding: 0.75rem 0.25rem;
+  border-radius: 0.4rem;
+}
+
+.content > .splitpanes__splitter::after,
+.content > .splitpanes__splitter::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 1px;
+  height: 3rem;
+  background-color: var(--color-border);
+  transform: translateY(-50%);
+}
+
+.content > .splitpanes__splitter::after {
+  left: 0.08rem;
+}
+
+.content > .splitpanes__splitter::before {
+  right: 0.08rem;
 }
 </style>

@@ -44,8 +44,12 @@ export default {
 };
 </script>
 
-<style>
-/* div container and h1 styled in App.vue */
+<style scoped>
+h1 {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  color: var(--color-heading);
+}
 
 .tab-container {
   display: flex;
