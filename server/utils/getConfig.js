@@ -28,7 +28,7 @@ function getConfig() {
 
   // if there is a new version of the configDefault, add the new fields to the user config
   if (config._version !== configDefault._version) {
-    const mergedConfig = { ...configDefault, ...config };
+    const mergedConfig = mergeConfig(configDefault, config);
     mergedConfig._version = configDefault._version;
 
     fs.writeFileSync(configFile, JSON.stringify(mergedConfig, null, 2));
@@ -53,6 +53,20 @@ async function getDockerTags() {
   } catch (error) {
     console.log("Error fetching docker tags");
   }
+}
+
+function mergeConfig(baseConfig, config) {
+  const mergedConfig = { ...baseConfig };
+  for (const key in config) {
+    if (config.hasOwnProperty(key)) {
+      if (typeof config[key] === "object") {
+        mergedConfig[key] = mergeConfig(baseConfig[key], config[key]);
+      } else {
+        mergedConfig[key] = config[key];
+      }
+    }
+  }
+  return mergedConfig;
 }
 
 module.exports = { getConfig, getDockerTags };

@@ -1,11 +1,11 @@
 {
   "name": "ssl-web-tools",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
     "dev.vue": "vite",
     "dev.node": "nodemon server/server.js",
     "build.vue": "vite build",
-    "build.docker": "vite build && docker build -t hithere157/ssl-web-tools:1.1.1 -f docker/Dockerfile .",
+    "build.docker": "vite build && docker build -t hithere157/ssl-web-tools:1.1.2 -f docker/Dockerfile .",
     "test": "jest",
     "prettier": "prettier -w ."
   },

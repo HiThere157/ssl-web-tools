@@ -126,6 +126,7 @@ export default {
 <style lang="scss" scoped>
 .result {
   width: 100%;
+  min-width: 45rem;
   margin-bottom: 1.25rem;
   border-radius: 0.75rem;
   overflow: hidden;
