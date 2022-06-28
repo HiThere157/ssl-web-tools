@@ -17,16 +17,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .tab {
   display: block;
   padding: 0.5rem 1rem;
   text-decoration: none;
   border-radius: 1.25rem;
   color: var(--color-text);
-}
 
-.tab:focus {
-  outline: 0.2rem solid var(--color-border);
+  &:focus {
+    outline: 0.2rem solid var(--color-border);
+  }
 }
 </style>

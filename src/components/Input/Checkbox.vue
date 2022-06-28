@@ -1,9 +1,9 @@
 <template>
-  <div class="input">
+  <div>
     <span>{{ label }}</span>
     <label class="input-switch">
       <input
-        class="pill green-pill"
+        class="pill pill-green"
         type="checkbox"
         :checked="modelValue"
         @input="$emit('update:modelValue', $event.target.checked)"
@@ -29,19 +29,32 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .input-switch {
   position: relative;
   display: block;
   margin-top: 0.5rem;
   width: 4.25rem;
   height: 2.5rem;
-}
 
-.input-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .input-slider {
+      background-color: var(--custom-green);
+
+      &:before {
+        transform: translateX(1.75rem);
+      }
+    }
+
+    &:focus + .input-slider,
+    &:hover + .input-slider {
+      border-color: var(--color-border-hover);
+    }
+  }
 }
 
 .input-slider {
@@ -56,30 +69,17 @@ export default {
   background-color: var(--color-background);
   cursor: pointer;
   transition: var(--transition-time-1);
-}
 
-.input-slider:before {
-  position: absolute;
-  content: "";
-  height: 1.6rem;
-  aspect-ratio: 1;
-  left: 0.25rem;
-  bottom: 0.25rem;
-  border-radius: 50%;
-  background-color: var(--color-background-mute);
-  transition: var(--transition-time-1);
-}
-
-.input input:checked + .input-slider {
-  background-color: var(--custom-green);
-}
-
-.input input:checked + .input-slider:before {
-  transform: translateX(1.75rem);
-}
-
-.input input:focus + .input-slider,
-.input input:hover + .input-slider {
-  border-color: var(--color-border-hover);
+  &:before {
+    position: absolute;
+    content: "";
+    height: 1.6rem;
+    aspect-ratio: 1;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    border-radius: 50%;
+    background-color: var(--color-background-mute);
+    transition: var(--transition-time-1);
+  }
 }
 </style>

@@ -4,7 +4,7 @@
   <hr />
   <div class="justify-right">
     <button
-      class="pill green-pill fs-1"
+      class="pill pill-green fs-1"
       @click="$socket.emit('runWhois', whois)"
     >
       Run Test

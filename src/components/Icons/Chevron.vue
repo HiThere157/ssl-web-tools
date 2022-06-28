@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .chevron {
   transition: var(--transition-time-1);
 }

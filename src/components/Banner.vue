@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <span class="banner-title fw-bold">{{ title }}</span>
+    <span class="title fw-bold">{{ title }}</span>
     <span class="fs-1 fw-bold">{{ description }}</span>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .banner {
   display: flex;
   width: 100%;
@@ -30,9 +30,9 @@ export default {
   align-items: center;
   background-color: var(--custom-red);
   color: var(--vt-c-text-light-1);
-}
 
-.banner-title {
-  font-size: 1.5rem;
+  & .title {
+    font-size: 1.5rem;
+  }
 }
 </style>

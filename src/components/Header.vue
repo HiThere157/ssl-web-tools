@@ -1,14 +1,14 @@
 <template>
   <div class="header">
-    <div class="header-title">
-      <img class="header-icon" src="/favicon.svg" />
+    <div class="title">
+      <img class="icon" src="/favicon.svg" />
       <h1>SSL Web Tools</h1>
     </div>
     <a
       v-if="newVersionAvailable"
       href="https://github.com/HiThere157/ssl-web-tools/releases"
       target="_blank"
-      class="pill green-pill"
+      class="pill pill-green"
       >New Version Available!</a
     >
   </div>
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .header {
   display: flex;
   width: 100%;
@@ -59,18 +59,18 @@ export default {
   justify-content: space-between;
   padding: 0.4rem;
   background-color: var(--color-background-mute);
-}
 
-.header-title {
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem;
-  column-gap: 0.75rem;
-  color: var(--color-heading);
-}
+  & .title {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    column-gap: 0.75rem;
+    color: var(--color-heading);
+  }
 
-.header-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  & .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
 </style>

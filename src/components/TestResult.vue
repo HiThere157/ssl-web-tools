@@ -62,7 +62,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 h1 {
   margin-bottom: 0.5rem;
   white-space: nowrap;

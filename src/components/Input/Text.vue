@@ -20,7 +20,7 @@
       />
       <button
         v-if="!onlyNumbers"
-        class="pill green-pill"
+        class="pill pill-green"
         @click="$emit('update:modelValue', '')"
       >
         <CloseIcon />
@@ -28,7 +28,7 @@
 
       <template v-else>
         <button
-          class="pill green-pill"
+          class="pill pill-green"
           @click="$emit('update:modelValue', Number(modelValue) + 1)"
         >
           <ChevronIcon :rotateUp="true" />
@@ -36,7 +36,7 @@
 
         <button
           v-if="onlyNumbers"
-          class="pill green-pill"
+          class="pill pill-green"
           @click="$emit('update:modelValue', Number(modelValue) - 1)"
         >
           <ChevronIcon />
@@ -77,41 +77,43 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .input-group {
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
 }
 
-.input input {
-  height: 2.5rem;
-  width: 100%;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  border: 0.2rem solid var(--color-border);
-  border-radius: 1.25rem;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  transition: var(--transition-time-1);
-}
+.input {
+  input {
+    height: 2.5rem;
+    width: 100%;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border: 0.2rem solid var(--color-border);
+    border-radius: 1.25rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: var(--transition-time-1);
 
-.input input::-webkit-outer-spin-button,
-.input input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
-.input input:hover,
-.input input:focus {
-  border-color: var(--color-border-hover);
-  outline: none;
-}
+    &:hover,
+    &:focus {
+      border-color: var(--color-border-hover);
+      outline: none;
+    }
+  }
 
-.input button {
-  height: 2.5rem;
-  aspect-ratio: 1;
-  padding: 0.25rem;
-  margin-left: 0.5rem;
+  button {
+    height: 2.5rem;
+    aspect-ratio: 1;
+    padding: 0.25rem;
+    margin-left: 0.5rem;
+  }
 }
 </style>

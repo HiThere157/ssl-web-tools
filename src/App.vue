@@ -59,9 +59,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import "./assets/base.css";
-@import "./assets/pill.css";
+@import "./assets/pill.scss";
 
 #app {
   min-width: fit-content;
@@ -74,37 +74,37 @@ export default {
   column-gap: 0.15rem;
   row-gap: 0.5rem;
   padding: 0.5rem;
-}
 
-.content > *:not(.splitpanes__splitter) {
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.4rem;
-  background-color: var(--color-background-soft);
-  min-width: min-content;
-}
+  & > *:not(.splitpanes__splitter) {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.4rem;
+    background-color: var(--color-background-soft);
+    min-width: min-content;
+  }
 
-.content > .splitpanes__splitter {
-  padding: 0.75rem 0.25rem;
-  border-radius: 0.4rem;
-}
+  & > .splitpanes__splitter {
+    padding: 0.75rem 0.25rem;
+    border-radius: 0.4rem;
 
-.content > .splitpanes__splitter::after,
-.content > .splitpanes__splitter::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  display: block;
-  width: 1px;
-  height: 3rem;
-  background-color: var(--color-border);
-  transform: translateY(-50%);
-}
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      display: block;
+      width: 1px;
+      height: 3rem;
+      background-color: var(--color-border);
+      transform: translateY(-50%);
+    }
 
-.content > .splitpanes__splitter::after {
-  left: 0.08rem;
-}
+    &::after {
+      left: 0.08rem;
+    }
 
-.content > .splitpanes__splitter::before {
-  right: 0.08rem;
+    &::before {
+      right: 0.08rem;
+    }
+  }
 }
 </style>
