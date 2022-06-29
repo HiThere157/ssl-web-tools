@@ -6,11 +6,19 @@
     description="Cannot connect to Socket! Running Tests is currently not available"
   />
 
-  <splitpanes class="content" :dblClickSplitter="false">
-    <pane>
+  <splitpanes
+    class="content"
+    :dblClickSplitter="false"
+    @dblclick="
+      if ($event.target.classList.contains('splitpanes__splitter'))
+        paneSize = 50;
+    "
+    @resize="paneSize = $event[0].size"
+  >
+    <pane :size="paneSize">
       <TestSelect />
     </pane>
-    <pane>
+    <pane :size="100 - paneSize">
       <TestResult />
     </pane>
   </splitpanes>
@@ -29,6 +37,7 @@ export default {
   data() {
     return {
       socketErrorVisible: false,
+      paneSize: 50,
     };
   },
   mounted() {
