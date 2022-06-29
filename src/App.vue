@@ -25,9 +25,11 @@
 </template>
 
 <script>
-import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
+import "./assets/base.css";
+import "./assets/pill.scss";
 
+import { Splitpanes, Pane } from "splitpanes";
 import Header from "./components/Header.vue";
 import Banner from "./components/Banner.vue";
 import TestSelect from "./components/TestSelect.vue";
@@ -68,17 +70,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "./assets/base.css";
-@import "./assets/pill.scss";
-
-#app {
-  min-width: fit-content;
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-}
-
+<style lang="scss" scoped>
 .content {
   column-gap: 0.15rem;
   row-gap: 0.5rem;

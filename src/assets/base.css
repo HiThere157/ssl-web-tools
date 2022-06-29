@@ -86,6 +86,13 @@
   background: var(--color-background-soft);
 }
 
+#app {
+  min-width: fit-content;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);
