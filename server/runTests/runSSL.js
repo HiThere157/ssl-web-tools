@@ -1,7 +1,7 @@
 const { spawn } = require("child_process");
 const { getConfig } = require("../utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("../utils/sendResponse");
-const { validateHost, validateInt } = require("../utils/validateInput");
+const Validator = require("../utils/validateInput");
 
 function runSSL(data, socket) {
   if (!getConfig()["ssl"]._enabled) return;
@@ -10,11 +10,23 @@ function runSSL(data, socket) {
   const timestamp = new Date().getTime();
   const title = "SSL Test of '" + target + "'";
 
-  if (!validateHost(target) || !validateInt(port, 1, 65535)) {
-    return sendStatusUpdate(socket, timestamp, title, "error", "Invalid Input");
+  const validator = new Validator();
+  validator
+    .host(target, { message: "Invalid Target" })
+    .int(port, { message: "Invalid Port", min: 1, max: 65535 });
+
+  if (validator.hasErrors()) {
+    return sendStatusUpdate(
+      socket,
+      timestamp,
+      title,
+      "error",
+      validator.getErrors(),
+    );
   }
 
   const args = [];
+
   if (useSelfSigned) args.push("--add-ca");
   if (useSelfSigned) args.push("/caCerts/*.pem");
   args.push(target + ":" + port);

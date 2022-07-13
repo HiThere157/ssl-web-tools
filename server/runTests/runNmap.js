@@ -1,12 +1,7 @@
 const { spawn } = require("child_process");
 const { getConfig } = require("../utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("../utils/sendResponse");
-const {
-  validateHost,
-  validateInt,
-  validateSelection,
-  validatePortRange,
-} = require("../utils/validateInput");
+const Validator = require("../utils/validateInput");
 
 function runNmap(data, socket) {
   if (!getConfig()["nmap"]._enabled) return;
@@ -17,17 +12,40 @@ function runNmap(data, socket) {
   const timestamp = new Date().getTime();
   const title = "Nmap to '" + target + "'";
 
-  if (
-    !validateHost(target) ||
-    !validateInt(subnet, 1, 32) ||
-    !validateSelection(timing, ["T2", "T3", "T4"]) ||
-    !validateSelection(portOption, ["T1000", "T100", "custom"]) ||
-    !validatePortRange(TCPPorts, portOption !== "custom")
-  ) {
-    return sendStatusUpdate(socket, timestamp, title, "error", "Invalid Input");
+  const validator = new Validator();
+  validator
+    .host(target, { message: "Invalid Target" })
+    .int(subnet, {
+      message: "Invalid Subnet",
+      optional: !targetSubnet,
+      min: 0,
+      max: 32,
+    })
+    .selection(timing, {
+      message: "Invalid Timing",
+      selections: ["T2", "T3", "T4"],
+    })
+    .selection(portOption, {
+      message: "Invalid Port Option",
+      selections: ["T1000", "T100", "custom"],
+    })
+    .portRange(TCPPorts, {
+      message: "Invalid TCP Ports",
+      optional: portOption !== "custom",
+    });
+
+  if (validator.hasErrors()) {
+    return sendStatusUpdate(
+      socket,
+      timestamp,
+      title,
+      "error",
+      validator.getErrors(),
+    );
   }
 
   const args = [];
+
   if (serviceDetection) args.push("-sV");
   if (OSDetection) args.push("-O");
   if (portOption === "T100") args.push("-F");

@@ -1,7 +1,7 @@
 const { spawn } = require("child_process");
 const { getConfig } = require("../utils/getConfig");
 const { sendResponse, sendStatusUpdate } = require("../utils/sendResponse");
-const { validateHost } = require("../utils/validateInput");
+const Validator = require("../utils/validateInput");
 
 function runWhois(data, socket) {
   if (!getConfig()["whois"]._enabled) return;
@@ -10,11 +10,21 @@ function runWhois(data, socket) {
   const timestamp = new Date().getTime();
   const title = "Whois to '" + target + "'";
 
-  if (!validateHost(target)) {
-    return sendStatusUpdate(socket, timestamp, title, "error", "Invalid Input");
+  const validator = new Validator();
+  validator.host(target, { message: "Invalid Target" });
+
+  if (validator.hasErrors()) {
+    return sendStatusUpdate(
+      socket,
+      timestamp,
+      title,
+      "error",
+      validator.getErrors(),
+    );
   }
 
   const args = [];
+
   args.push(target);
 
   const cmd = spawn("whois", args);
