@@ -38,7 +38,7 @@ function runNmap(data, socket) {
   if (targetSubnet) {
     targetWithSubnet += "/" + subnet;
   }
-  
+
   args.push(targetWithSubnet);
   args.push("-" + timing);
 
