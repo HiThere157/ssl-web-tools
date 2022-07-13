@@ -1,7 +1,13 @@
 <template>
   <Text label="Target" v-model="nmap.target" placeholder="example.com" />
 
-  <Checkbox label="Scan Subnet" v-model="nmap.targetSubnet" />
+  <div class="justify-start" style="column-gap: 5rem">
+    <Checkbox label="Scan Subnet" v-model="nmap.targetSubnet" />
+    <Checkbox label="Service Detection" v-model="nmap.serviceDetection" />
+    <Checkbox label="OS Detection" v-model="nmap.OSDetection" />
+    <Checkbox label="Verbose" v-model="nmap.verbose" />
+  </div>
+
   <Text
     v-if="nmap.targetSubnet"
     label="Subnet"
@@ -10,10 +16,6 @@
     placeholder="24"
   />
 
-  <div class="justify-start" style="column-gap: 5rem">
-    <Checkbox label="Service Detection" v-model="nmap.serviceDetection" />
-    <Checkbox label="OS Detection" v-model="nmap.OSDetection" />
-  </div>
   <Select label="Timing" v-model="nmap.timing" :options="timingOptions" />
 
   <Select
@@ -27,8 +29,6 @@
     v-model="nmap.TCPPorts"
     placeholder="Comma separated list of ports"
   />
-
-  <Checkbox label="Verbose" v-model="nmap.verbose" />
 
   <hr />
   <div class="justify-right">
