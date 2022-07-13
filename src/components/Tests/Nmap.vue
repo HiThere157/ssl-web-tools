@@ -1,5 +1,15 @@
 <template>
   <Text label="Target" v-model="nmap.target" placeholder="example.com" />
+
+  <Checkbox label="Scan Subnet" v-model="nmap.targetSubnet" />
+  <Text
+    v-if="nmap.targetSubnet"
+    label="Subnet"
+    :onlyNumbers="true"
+    v-model="nmap.subnet"
+    placeholder="24"
+  />
+
   <div class="justify-start" style="column-gap: 5rem">
     <Checkbox label="Service Detection" v-model="nmap.serviceDetection" />
     <Checkbox label="OS Detection" v-model="nmap.OSDetection" />

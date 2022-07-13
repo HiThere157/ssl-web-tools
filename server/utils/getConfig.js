@@ -51,6 +51,7 @@ async function getDockerTags() {
       return tags;
     }
   } catch (error) {
+    console.error(error);
     console.log("Error fetching docker tags");
   }
 }

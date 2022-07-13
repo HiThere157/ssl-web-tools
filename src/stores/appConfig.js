@@ -30,6 +30,8 @@ export const useConfigStore = defineStore("appConfig", {
       nmap: {
         _enabled: true,
         target: "",
+        targetSubnet: false,
+        subnet: 24,
         serviceDetection: true,
         OSDetection: true,
         timing: "T3",
