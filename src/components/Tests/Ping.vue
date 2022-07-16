@@ -3,15 +3,12 @@
   <Text label="Count" :onlyNumbers="true" v-model="ping.count" />
 
   <hr />
-  <div class="justify-right">
-    <button class="pill pill-green fs-1" @click="$socket.emit('runPing', ping)">
-      Run Test
-    </button>
-  </div>
+  <RunTestButton testName="runPing" :testObject="ping" />
 </template>
 
 <script>
 import Text from "../Input/Text.vue";
+import RunTestButton from "../RunTestButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "../../stores/appConfig.js";
@@ -27,6 +24,7 @@ export default {
   },
   components: {
     Text,
+    RunTestButton,
   },
 };
 </script>

@@ -2,18 +2,12 @@
   <Select label="Test" v-model="debug.selectedTest" :options="testOptions" />
 
   <hr />
-  <div class="justify-right">
-    <button
-      class="pill pill-green fs-1"
-      @click="$socket.emit('runDebug', debug)"
-    >
-      Run Test
-    </button>
-  </div>
+  <RunTestButton testName="runDebug" :testObject="debug" />
 </template>
 
 <script>
 import Select from "../Input/Select.vue";
+import RunTestButton from "../RunTestButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "../../stores/appConfig.js";
@@ -36,6 +30,7 @@ export default {
   },
   components: {
     Select,
+    RunTestButton,
   },
 };
 </script>

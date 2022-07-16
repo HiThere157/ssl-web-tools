@@ -31,17 +31,14 @@
   />
 
   <hr />
-  <div class="justify-right">
-    <button class="pill pill-green fs-1" @click="$socket.emit('runNmap', nmap)">
-      Run Test
-    </button>
-  </div>
+  <RunTestButton testName="runNmap" :testObject="nmap" />
 </template>
 
 <script>
 import Text from "../Input/Text.vue";
 import Checkbox from "../Input/Checkbox.vue";
 import Select from "../Input/Select.vue";
+import RunTestButton from "../RunTestButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "../../stores/appConfig.js";
@@ -75,6 +72,7 @@ export default {
     Text,
     Checkbox,
     Select,
+    RunTestButton,
   },
 };
 </script>

@@ -2,18 +2,12 @@
   <Text label="Target" v-model="whois.target" placeholder="example.com" />
 
   <hr />
-  <div class="justify-right">
-    <button
-      class="pill pill-green fs-1"
-      @click="$socket.emit('runWhois', whois)"
-    >
-      Run Test
-    </button>
-  </div>
+  <RunTestButton testName="runWhois" :testObject="whois" />
 </template>
 
 <script>
 import Text from "../Input/Text.vue";
+import RunTestButton from "../RunTestButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "../../stores/appConfig.js";
@@ -29,6 +23,7 @@ export default {
   },
   components: {
     Text,
+    RunTestButton,
   },
 };
 </script>

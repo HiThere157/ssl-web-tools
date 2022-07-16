@@ -9,16 +9,13 @@
   <Checkbox label="Use Self-Signed Certificates" v-model="ssl.useSelfSigned" />
 
   <hr />
-  <div class="justify-right">
-    <button class="pill pill-green fs-1" @click="$socket.emit('runSSL', ssl)">
-      Run Test
-    </button>
-  </div>
+  <RunTestButton testName="runSSL" :testObject="ssl" />
 </template>
 
 <script>
 import Text from "../Input/Text.vue";
 import Checkbox from "../Input/Checkbox.vue";
+import RunTestButton from "../RunTestButton.vue";
 
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "../../stores/appConfig.js";
@@ -35,6 +32,7 @@ export default {
   components: {
     Text,
     Checkbox,
+    RunTestButton,
   },
 };
 </script>
