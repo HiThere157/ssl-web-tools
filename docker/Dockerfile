@@ -2,7 +2,8 @@ FROM node:slim
 
 RUN apt update && apt install -y --no-install-recommends \
   iputils-ping dnsutils whois nmap traceroute \
-  dos2unix bsdmainutils procps ntp
+  dos2unix bsdmainutils procps ntp \
+  colortest
 
 COPY ./dist /app/dist
 COPY ./server /app/server

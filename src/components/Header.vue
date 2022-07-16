@@ -8,8 +8,8 @@
       v-if="newVersionAvailable"
       href="https://github.com/HiThere157/ssl-web-tools/releases"
       target="_blank"
-      class="pill pill-green"
-      >New Version Available!</a
+      class="pill pill-orange"
+      >New Version! [{{ _version }} 🡺 {{ _dockerTag }}]</a
     >
   </div>
 </template>

@@ -5,6 +5,10 @@ export const useConfigStore = defineStore("appConfig", {
     return {
       _version: null,
       _dockerTag: null,
+      debug: {
+        _enabled: false,
+        selectedTest: "color",
+      },
       ssl: {
         _enabled: true,
         target: "",

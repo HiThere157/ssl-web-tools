@@ -3,6 +3,7 @@
     <h1>Run Tests</h1>
 
     <div class="tab-container">
+      <Tab v-if="debug._enabled" class="pill pill-orange" title="Debug" route="/debug" />
       <Tab v-if="ssl._enabled" title="SSL" route="/ssl" />
       <Tab v-if="ping._enabled" title="Ping" route="/ping" />
       <Tab v-if="dig._enabled" title="Dig" route="/dig" />
@@ -27,9 +28,11 @@ export default {
   setup() {
     const config = useConfigStore();
     config.fetchConfig();
-    const { ssl, ping, dig, whois, nmap, traceroute } = storeToRefs(config);
+    const { debug, ssl, ping, dig, whois, nmap, traceroute } =
+      storeToRefs(config);
 
     return {
+      debug,
       ssl,
       ping,
       dig,

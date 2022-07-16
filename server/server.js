@@ -13,6 +13,7 @@ const { getConfig, getDockerTags } = require("./utils/getConfig");
 getConfig();
 
 const allTests = {
+  runDebug: require("./runTests/runDebug"),
   runSSL: require("./runTests/runSSL"),
   runPing: require("./runTests/runPing"),
   runDig: require("./runTests/runDig"),
