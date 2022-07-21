@@ -30,7 +30,7 @@ function runDebug(data, socket) {
 
   let command = "";
   if (selectedTest === "color") {
-    command = "colortest-16b";
+    command = "colortest-16";
   }
 
   if(command === "") {
